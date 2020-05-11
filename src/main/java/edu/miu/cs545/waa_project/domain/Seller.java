@@ -17,6 +17,10 @@ public class Seller extends User{
 
     public Seller(){}
 
+    public Seller(String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
+    }
+
     public List<Product> getProducts() {
         return products;
     }

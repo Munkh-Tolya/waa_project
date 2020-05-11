@@ -9,8 +9,9 @@ import java.util.List;
 @DiscriminatorValue("buyer")
 public class Buyer extends User{
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Card card;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="card_owner_id")
+    private List<Item> cardItems;
 
     @OneToMany
     @JoinColumn(name="buyer_id")
@@ -20,6 +21,10 @@ public class Buyer extends User{
     private List<Seller> following;
 
     public Buyer(){}
+
+    public Buyer(String firstName, String lastName, String email, String password) {
+        super(firstName, lastName, email, password);
+    }
 
     public void addOrder(Order order){
         orders.add(order);
@@ -35,12 +40,20 @@ public class Buyer extends User{
     public void removeFollowing(Seller seller){
         following.remove(seller);
     }
-    public Card getCard() {
-        return card;
+
+    public void removeItem(Item item) {
+        cardItems.remove(item);
+    }
+    public void addItem(Item item) {
+        cardItems.add(item);
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public List<Item> getCardItems() {
+        return cardItems;
+    }
+
+    public void setCardItems(List<Item> itemList) {
+        this.cardItems = itemList;
     }
 
     public List<Order> getOrders() {

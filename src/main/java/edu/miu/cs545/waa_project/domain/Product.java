@@ -12,6 +12,8 @@ public class Product {
     private Long id;
 
     private String name;
+
+    @Lob
     private String description;
     private double price;
     private String imagePath;
@@ -32,14 +34,16 @@ public class Product {
 
     public Product(){}
     public Product(String name, String description, double price,
-                   String imagePath, int quantity, Category category) {
-        this.id = id;
+                   String imagePath, int quantity, Category category, Seller seller){
         this.name = name;
         this.description = description;
         this.price = price;
         this.imagePath = imagePath;
         this.quantity = quantity;
+        this.enabled = false;
         this.category = category;
+        this.seller = seller;
+        this.seller.addProduct(this);
     }
     public String getName() {
         return name;

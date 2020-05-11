@@ -13,8 +13,6 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    private String password;
-
     @Column(name="FIRST_NAME")
     private String firstName;
 
@@ -25,7 +23,15 @@ public class User {
     @Email
     private String email;
 
+    private String password;
+
     public User(){}
+    public User(String firstName, String lastName, String email, String password){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getPassword() {
         return password;
