@@ -3,24 +3,27 @@ package edu.miu.cs545.waa_project.domain;
 import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @DiscriminatorValue("buyer")
 public class Buyer extends User{
 
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="card_owner_id")
-    private List<Item> cardItems;
+    private List<Item> cardItems = new ArrayList<Item>();
 
     @OneToMany
     @JoinColumn(name="buyer_id")
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<Order>();
 
     @ManyToMany
-    private List<Seller> following;
+    private List<Seller> following = new ArrayList<Seller>();
 
-    public Buyer(){}
+    public Buyer(){
+    }
 
     public Buyer(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password);
@@ -41,10 +44,10 @@ public class Buyer extends User{
         following.remove(seller);
     }
 
-    public void removeItem(Item item) {
+    public void removeCardItem(Item item) {
         cardItems.remove(item);
     }
-    public void addItem(Item item) {
+    public void addCardItem(Item item) {
         cardItems.add(item);
     }
 

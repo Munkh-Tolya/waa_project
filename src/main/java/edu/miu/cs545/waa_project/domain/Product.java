@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -31,6 +33,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private Seller seller;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 
     public Product(){}
     public Product(String name, String description, double price,
@@ -97,8 +103,14 @@ public class Product {
     public MultipartFile getProductImage() {
         return productImage;
     }
-
     public void setProductImage(MultipartFile productImage) {
         this.productImage = productImage;
+    }
+
+    public void addReview(ProductReview review){
+        productReviewList.add(review);
+    }
+    public void removeReview(ProductReview review){
+        productReviewList.remove(review);
     }
 }

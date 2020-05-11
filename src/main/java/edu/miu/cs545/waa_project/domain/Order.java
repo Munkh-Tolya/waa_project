@@ -2,6 +2,7 @@ package edu.miu.cs545.waa_project.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -10,27 +11,36 @@ import java.util.Date;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int id;
+    public Long id;
 
     private double sum;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
-    @ManyToOne
-    private Address shippingAddress;
-
-    @OneToOne
-    private PaymentInfo paymentInfo;
+//    @ManyToOne
+//    private Address shippingAddress;
+//
+//    @OneToOne
+//    private PaymentInfo paymentInfo;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @OneToMany
     @JoinColumn(name="order_id")
-    private List<Item> items;
+    private List<Item> items = new ArrayList<Item>();
 
     public Order(){}
+    public Order(Date updateTime, List<Item> items) {
+        this.updateTime = updateTime;
+        this.status = OrderStatus.New;
+        this.items = items;
+        this.sum = 0.0;
+        for(Item item : this.items){
+            this.sum += item.getPrice();
+        }
+    }
     public void addItem(Item item){
         items.add(item);
     }
@@ -70,19 +80,19 @@ public class Order {
         this.updateTime = updateTime;
     }
 
-    public Address getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(Address shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
-    public PaymentInfo getPaymentInfo() {
-        return paymentInfo;
-    }
-
-    public void setPaymentInfo(PaymentInfo paymentInfo) {
-        this.paymentInfo = paymentInfo;
-    }
+//    public Address getShippingAddress() {
+//        return shippingAddress;
+//    }
+//
+//    public void setShippingAddress(Address shippingAddress) {
+//        this.shippingAddress = shippingAddress;
+//    }
+//
+//    public PaymentInfo getPaymentInfo() {
+//        return paymentInfo;
+//    }
+//
+//    public void setPaymentInfo(PaymentInfo paymentInfo) {
+//        this.paymentInfo = paymentInfo;
+//    }
 }

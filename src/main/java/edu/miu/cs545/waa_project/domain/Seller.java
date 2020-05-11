@@ -12,8 +12,8 @@ public class Seller extends User{
     private List<Product> products = new ArrayList<>();
 
     @OneToMany
-    @JoinColumn(name="buyer_id")
-    private List<Order> orders;
+    @JoinColumn(name="seller_id")
+    private List<Order> orders = new ArrayList<Order>();
 
     public Seller(){}
 
