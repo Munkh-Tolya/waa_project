@@ -3,3 +3,5 @@ INSERT INTO USER(user_type,email, first_name, last_name, password) VALUES ('buye
 INSERT INTO USER(user_type,email, first_name, last_name, password) VALUES ('seller','seller@miu.edu','Mister','Bean','seller');
 
 
+
+

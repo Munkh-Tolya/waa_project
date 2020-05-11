@@ -1,5 +1,8 @@
 package edu.miu.cs545.waa_project.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +16,11 @@ public class Product {
     private double price;
     private String imagePath;
     private int quantity;
-
     private boolean enabled;
+
+    @Transient
+    @JsonIgnore
+    private MultipartFile productImage;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -27,7 +33,6 @@ public class Product {
     public Product(){}
     public Product(String name, String description, double price,
                    String imagePath, int quantity, Category category) {
-        super();
         this.id = id;
         this.name = name;
         this.description = description;
@@ -72,7 +77,6 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -84,5 +88,13 @@ public class Product {
     }
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public MultipartFile getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(MultipartFile productImage) {
+        this.productImage = productImage;
     }
 }
