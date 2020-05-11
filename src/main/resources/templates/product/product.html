@@ -1,0 +1,53 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+<section>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Product Information</h1>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <img th:attr="src=@{'/' + ${product.imagePath}},title=${product.name},alt=${product.name}" />
+        </div>
+        <div class="col-md-5">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3 th:text="${product.name}"></h3>
+                    <p th:text="${product.description}"></p>
+                    <p>
+                        <strong>Category: </strong> <span th:text="${product.category}" th:remove="tag"></span>
+                    </p>
+                    <p>
+                        <strong>Availble units in stock: </strong><span th:text="${product.quantity}" th:remove="tag"></span>
+                    </p>
+                    <p>
+                        <strong>Seller: </strong><span th:text="${product.quantity}" th:remove="tag"></span>
+                    </p>
+                    <h4><span th:text="${product.price}" th:remove="tag"></span>USD</h4>
+                    <p>
+                        <a th:href="@{/product/list}" class="btn btn-default">
+                            <span class="glyphicon-hand-left glyphicon"></span> Back
+                        </a>
+                        <a href="#" class="btn btn-warning btn-large order-btn" th:data="${product.id}">
+                            <span class="glyphicon-shopping-cart glyphicon"></span> Order Now </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
