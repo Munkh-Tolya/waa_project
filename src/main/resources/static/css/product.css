@@ -107,7 +107,7 @@ h4 {
     font-weight: 500;
 }
 .all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .stars {
-    color: #ffc111;
+    color: #346beb;
     margin: 2px 0 10px;
 }
 .all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .stars mat-icon {
@@ -142,7 +142,7 @@ h4 {
 }
 
 .all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap a:hover {
-    background: #ffc111;
+    background: #346beb;
 }
 .all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap a mat-icon {
     -webkit-transition: .3s;

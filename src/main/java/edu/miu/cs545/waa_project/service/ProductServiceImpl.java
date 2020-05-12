@@ -1,5 +1,6 @@
 package edu.miu.cs545.waa_project.service;
 
+import edu.miu.cs545.waa_project.domain.Category;
 import edu.miu.cs545.waa_project.domain.Product;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.repository.ProductRepository;
@@ -18,6 +19,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getAll() {
 		return (List<Product>) productRepository.findAll();
+	}
+
+	@Override
+	public List<Product> getByCategory(Integer categoryId) {
+		return productRepository.findProductsByCategory(categoryId);
 	}
 
 	@Override

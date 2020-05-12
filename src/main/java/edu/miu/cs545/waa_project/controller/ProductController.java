@@ -35,8 +35,12 @@ public class ProductController {
     private UserService userService;
 
     @GetMapping("/product")
-    public String list(Model model) {
-        model.addAttribute("products", productService.getAll());
+    public String list(Model model, @RequestParam(required = false) String category) {
+        if(category!=null){
+            model.addAttribute("products", productService.getByCategory(Integer.parseInt(category)));
+        }else{
+            model.addAttribute("products", productService.getAll());
+        }
         model.addAttribute("categories", categoryService.getCategories());
         return "product/products";
     }

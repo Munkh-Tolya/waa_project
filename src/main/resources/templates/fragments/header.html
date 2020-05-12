@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
@@ -30,17 +30,19 @@
                     <a class="nav-link" th:href="@{/admin/reviews}">Admin review</a>
                 </li>
             </ul>
-            <a class="card-link" href="#">
-                <i class="material-icons">shopping_cart</i>
-                <span id="itemCount">12</span>
-            </a>
+            <div sec:authorize="hasRole('ROLE_BUYER')">
+                <a class="card-link" th:href="@{/cart}">
+                    <i class="material-icons">shopping_cart</i>
+                    <span id="itemCount" th:text="${shoppingCart.size()}"></span>
+                </a>
+            </div>
             <div>
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Username
+                        <span th:text="${userName}"></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Logout </a>
+                        <a class="dropdown-item" th:href="@{/logout}">Logout </a>
                     </div>
                 </div>
             </div>

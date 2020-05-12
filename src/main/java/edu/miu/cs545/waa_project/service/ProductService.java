@@ -10,6 +10,8 @@ public interface ProductService {
 	
 	List<Product> getAll();
 
+	List<Product> getByCategory(Integer categoryId);
+
 	void save(Product product);
 
 	Product find(Long id);
