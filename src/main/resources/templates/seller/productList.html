@@ -1,0 +1,45 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<section>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Products</h1>
+            <p>All the available products in our store</p>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="container pt-4">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th style="width: 75px">Picture</th>
+                <th>Name</th>
+                <th>Unit Price</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tr th:each="product : ${products}">
+                <td><img class="img-thumbnail w-100" th:attr="src=@{'/' + ${product.imagePath}},title=${product.name},alt=${product.name}"/></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.category}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td><a th:href="@{/product/{id}(id=${product.id})}">Edit</a></td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
