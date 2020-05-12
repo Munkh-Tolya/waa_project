@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org" >
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home Page</title>
+<!--   Өөрийн page дээ custom CSS ээ нэмэх бол ингээд нэмчих юм байна
+    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/main.css}">-->
 </head>
 <body>
+<div class="container" layout:fragment="main-content">
+    <!-- BUYER HOME START-->
+    <section class="mb30">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <section th:replace="fragments/categories :: section"></section>
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <section th:replace="fragments/carousel :: section"></section>
+            </div>
+        </div>
+    </section>
+    <section th:replace="fragments/brand-promise :: section"></section>
+    <!-- BUYER HOME END-->
+</div>
 
 </body>
 </html>

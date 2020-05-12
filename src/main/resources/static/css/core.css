@@ -1,0 +1,239 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    line-height: 1.4;
+    font-family: Roboto,Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+header{
+    margin-bottom: 25px;
+}
+header #navbarDropdown {
+    border:1px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+}
+
+
+header .navbar-nav a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width .3s;
+}
+header .navbar-nav a:hover::after {
+    width: 100%;
+}
+header .navbar-brand{
+    font-family: 'Balsamiq Sans', cursive;
+    margin-right: 30px;
+}
+header .card-link{
+    display: inline-block;
+    padding-top: 5px;
+    color: #fff;
+    position: relative;
+    margin-right: 30px;
+}
+
+header .card-link #itemCount{
+    position: absolute;
+    top: -5px;
+    right: -14px;
+    background: #346beb;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 10px;
+    text-align: center;
+    padding-top: 2px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: #f5f5f5;
+    line-height: 50px;
+}
+footer .title{
+    font-family: 'Balsamiq Sans', cursive;
+    margin-left: 1em;
+}
+
+footer .date{
+    float: right;
+    margin-right: 1em;
+}
+
+.container{
+    max-width: 1300px;
+    /* margin: 0 auto; */
+    padding: 0 15px!important;
+    margin-bottom:100px;
+}
+
+
+#topCategories h4{
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    color: #444;
+    padding: 15px 20px 15px 10px;
+    font-weight: 500;
+    font-size: 14.5px;
+    margin: 0;
+    text-transform: uppercase;
+}
+#topCategories .cat-list ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#topCategories .cat-list a{
+    padding-top: 13px;
+    padding-bottom: 13px!important;
+    border-top: 1px solid #d9d9d9;
+    margin: 0 10px -1px;
+    color: #777;
+    font-size: 15px;
+    display: block;
+}
+#topCategories .cat-list a:hover{
+    color: #346beb;
+    text-decoration: none;
+}
+.border-gray {
+    border: 1px solid #d9d9d9;
+}
+.noborder{
+    border:none !Important;
+}
+
+.carousel-item .carousel-caption{
+    left: 40px;
+    top: 20%;
+    max-width: 45%;
+}
+.carousel-item .carousel-caption h2{
+    font-size: 48px;
+    text-align: left;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+.carousel-item .carousel-caption p{
+    font-size: 36px;
+    text-align: left;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+.carousel-indicators li{
+    background-color: #000;
+    opacity: .2;
+}
+.carousel-indicators li:hover{
+    background-color: #346beb;
+    opacity: .8;
+}
+.carousel-indicators li.active{
+    background-color: #346beb;
+    opacity: 1;
+}
+#heroBanner .carousel-control-prev, #heroBanner .carousel-control-next{
+    display: none;
+}
+.btn{
+    display: block;
+    color: #333;
+    padding: 7px 33px 5px;
+    width: 180px;
+    border-radius: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+}
+.btn-blue{
+    background: #346beb;
+    color:#fff;
+}
+.btn-blue:hover{
+    background: #fff;
+    color:#346beb;
+    border:1px solid #346beb;
+}
+
+.brand-promises{
+    padding: 25px;
+    color: #777;
+    font-size: 14px;
+}
+.brand-promises h4{
+    color: rgba(0,0,0,.87);
+    text-transform: uppercase;
+    font-size: 14.5px;
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 5px;
+}
+.brand-promises .item{
+    position: relative;
+    padding: 18px 0 18px 47px;
+    min-height: 62px;
+}
+.brand-promises .item::before{
+    font-family: "Material Icons";
+    font-size: 41px;
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 10px;
+    color: #346beb;
+}
+.brand-promises .item.bonus-plus::before{
+    content:"\e8f6";
+}
+.brand-promises .item.free-shipping::before{
+    content:"\e558";
+}
+.brand-promises .item.money-back-guarentee::before{
+    content:"\e263";
+}
+.brand-promises .item.online-support::before{
+    content:"\e889";
+}
+.brand-promises .item.has-sep::after{
+    content:" ";
+    width: 1px;
+    height: 100%;
+    top: 0px;
+    right: -11px;
+    background-color: #e5e5e5;
+    position: absolute;
+    display: block;
+
+}
+.border-gray-ligth {
+    border: 1px solid #e5e5e5;
+}
+
+.mb30{
+    margin-bottom: 30px;
+}
+.mb20{
+    margin-bottom: 20px;
+}
+.mt30{
+    margin-top: 30px;
+}
