@@ -26,7 +26,7 @@
                     <p>$<span th:text="${product.price}" th:remove="tag"></span></p>
                     <p>Available <span th:text="${product.quantity}" th:remove="tag"></span> units in stock</p>
                     <p>
-                        <a th:href="@{/product(id=${product.id})}" class="btn btn-primary">
+                        <a th:href="@{/product/{id}(id=${product.id})}" class="btn btn-primary">
                             <span class="glyphicon-info-sign glyphicon"/></span> Details
                         </a>
                     </p>

@@ -31,9 +31,9 @@ public class WaaProjectApplication implements CommandLineRunner {
     public void run(String... args) throws Exception
     {
         Admin admin = new Admin("admin","admin","admin@miu.edu","$2a$10$/8XXI4KpM2cp8evP7.NXjOmLLXFNHj9VtqB9wOUojWOk3fAISRvx.");
-        Seller seller = new Seller("seller","seller","seller@miu.edu","$2a$10$rH.SaKTlzH0W4mbQ6JkZz.Ss7whuKuwBUyFIkr1OY.15SYSC0jJ2O");
-        Seller seller1 = new Seller("seller1","seller1","seller1@miu.edu","$2a$10$rH.SaKTlzH0W4mbQ6JkZz.Ss7whuKuwBUyFIkr1OY.15SYSC0jJ2O");
-        Buyer buyer = new Buyer("buyer","buyer","buyer@miu.edu","$2a$10$gKkVcQ71UXf7yC3l1A4cD.C5YAD5dYo6cUQyyS4J/Q5qokZnJ94x.");
+        Seller seller = new Seller("seller","seller","seller@miu.edu","$2a$10$gKkVcQ71UXf7yC3l1A4cD.C5YAD5dYo6cUQyyS4J/Q5qokZnJ94x.");
+        Seller seller1 = new Seller("seller1","seller1","seller1@miu.edu","$2a$10$gKkVcQ71UXf7yC3l1A4cD.C5YAD5dYo6cUQyyS4J/Q5qokZnJ94x.");
+        Buyer buyer = new Buyer("buyer","buyer","buyer@miu.edu","$2a$10$rH.SaKTlzH0W4mbQ6JkZz.Ss7whuKuwBUyFIkr1OY.15SYSC0jJ2O");
         userRepository.saveAll(Arrays.asList(admin,seller,seller1,buyer));
 
         /* CATEGORY START */
