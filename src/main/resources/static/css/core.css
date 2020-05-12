@@ -153,7 +153,7 @@ footer .date{
 #heroBanner .carousel-control-prev, #heroBanner .carousel-control-next{
     display: none;
 }
-.btn{
+.btn-core{
     display: block;
     color: #333;
     padding: 7px 33px 5px;

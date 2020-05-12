@@ -3,7 +3,6 @@ package edu.miu.cs545.waa_project.controller;
 import edu.miu.cs545.waa_project.WaaProjectApplication;
 import edu.miu.cs545.waa_project.domain.Product;
 import edu.miu.cs545.waa_project.domain.Seller;
-import edu.miu.cs545.waa_project.domain.User;
 import edu.miu.cs545.waa_project.exception.InvalidImageUploadException;
 import edu.miu.cs545.waa_project.service.CategoryService;
 import edu.miu.cs545.waa_project.service.ProductService;
@@ -39,7 +38,7 @@ public class ProductController {
     public String list(Model model) {
         model.addAttribute("products", productService.getAll());
         model.addAttribute("categories", categoryService.getCategories());
-        return "product/productnew";
+        return "product/products";
     }
 
     @GetMapping("/product/{id}")
