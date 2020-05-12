@@ -7,5 +7,5 @@ import edu.miu.cs545.waa_project.domain.Product;
 public interface ItemService {
 
     // Find item by product
-    Item findByProduct(Product product);
+    Item findTopByProduct(Product product);
 }

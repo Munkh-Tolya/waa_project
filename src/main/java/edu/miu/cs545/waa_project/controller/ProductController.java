@@ -118,8 +118,7 @@ public class ProductController {
     @GetMapping("/seller/product/delete/{id}")
     public String deleteProduct(@PathVariable(value = "id") Long id) {
         Product product = productService.find(id);
-        if (product != null && itemService.findByProduct(product) == null){
-            System.out.println(itemService.findByProduct(product).getPrice());
+        if (product != null && itemService.findTopByProduct(product) == null){
             productService.delete(product);
         } else {
             System.out.println("Cannot delete");

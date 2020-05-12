@@ -12,7 +12,7 @@ public class ItemServiceImpl implements ItemService{
     private ItemRepository itemRepository;
 
     @Override
-    public Item findByProduct(Product product) {
+    public Item findTopByProduct(Product product) {
         return itemRepository.findTopByProduct(product);
     }
 }
