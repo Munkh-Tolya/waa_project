@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface ProductService {
 	
-	public List<Product> getAll();
+	List<Product> getAll();
 
-	public void save(Product product);
+	void save(Product product);
 
-	public Product find(Long id);
+	Product find(Long id);
+
+	void delete(Product product);
 
 	List<Product> getProductsBySeller(Seller seller);
 	

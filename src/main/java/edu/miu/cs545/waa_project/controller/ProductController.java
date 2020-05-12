@@ -89,11 +89,12 @@ public class ProductController {
         return "redirect:/seller/product";
     }
 
+    //Exception handler for image upload
     @ExceptionHandler(InvalidImageUploadException.class)
     public ModelAndView handleError(HttpServletRequest request, InvalidImageUploadException exception) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("invalidImage", exception.getFullMessage());
-        mav.setViewName("image-upload-error");
+        mav.setViewName("seller/image-upload-error");
         return mav;
     }
 
@@ -103,6 +104,14 @@ public class ProductController {
         Seller seller = (Seller)userService.findByEmail(auth.getName());
         model.addAttribute("products", productService.getProductsBySeller(seller));
         return "/seller/productList";
+    }
+
+    @GetMapping("/seller/product/delete/{id}")
+    public String deleteProduct(@PathVariable(value = "id") Long id) {
+        Product product = productService.find(id);
+        if (product != null)
+            productService.delete(product);
+        return "redirect:/seller/product";
     }
 
     /***Product CRUD functionality for Seller: END***/
