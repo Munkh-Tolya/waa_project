@@ -35,11 +35,11 @@ public class ProductController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/product/list")
+    @GetMapping("/product")
     public String list(Model model) {
         model.addAttribute("products", productService.getAll());
         model.addAttribute("categories", categoryService.getCategories());
-        return "product/products";
+        return "product/productnew";
     }
 
     @GetMapping("/product/{id}")

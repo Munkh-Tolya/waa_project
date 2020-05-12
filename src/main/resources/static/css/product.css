@@ -1,0 +1,172 @@
+.container{
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 15px!important;
+}
+.sidebar-wrapper{   
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+}
+a {
+    text-decoration: none;
+}
+h4 {
+    font-size: 18px;
+    text-transform: capitalize;
+    line-height: 1;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.all-products {
+    padding-left: 17px;
+    background: #fff;
+    /* border:1px solid #ccc; */
+    float:left;
+    flex: 1 1 100%; 
+    box-sizing: border-box; 
+    width: 75%;
+}
+
+.col{
+    padding: 9px 0;
+    float:left;
+    flex: 1 1 100%; 
+    box-sizing: border-box; 
+    max-width: 25%;
+}
+.col .product-item {
+    position: relative;
+    height: auto;
+    padding: 0 10px;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.mat-card {
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    position: relative;
+    padding: 16px;
+    border-radius: 4px;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    background: #fff;
+    color: rgba(0,0,0,.87);
+    flex-direction: column;
+    box-sizing: border-box; 
+    display: flex;
+}
+.mat-card>:first-child {
+    margin-top: 0;
+}
+.product-img {
+    background: #f6f6f6;
+}
+
+.mat-drawer-container {
+    color: #333;
+}
+
+
+
+.product-img img {
+    max-width: 180px;
+    margin-bottom: 12px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-info-wrapper {
+    padding: 15px;
+}
+
+.col .product-item .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 2px 2px 6px 0 rgba(0,0,0,.1),0 1px 1px 0 transparent,0 1px 3px 0 rgba(0,0,0,.12)!important;
+    padding: 0;
+}
+
+
+
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper {
+    padding: 15px;
+}
+
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .category {
+    margin-bottom: 4px;
+    display: block;
+    font-weight: 300;
+}
+
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .title-wrap h4 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 500;
+}
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .stars {
+    color: #ffc111;
+    margin: 2px 0 10px;
+}
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .stars mat-icon {
+    font-size: 17px;
+    line-height: 17px;
+    height: 17px;
+    width: 17px;
+    vertical-align: middle;
+}
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap{
+    flex-direction: row; 
+    box-sizing: border-box; 
+    display: flex; 
+    place-content: center space-between; 
+    align-items: center;
+}
+
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap p {
+    font-size: 19px;
+    margin-bottom:0px;
+}
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap a {
+    cursor: pointer;
+    -webkit-transition: .3s;
+    transition: .3s;
+    width: 38px;
+    height: 38px;
+    background: #e2e2e2;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 46px;
+}
+
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap a:hover {
+    background: #ffc111;
+}
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap a mat-icon {
+    -webkit-transition: .3s;
+    transition: .3s;
+    font-size: 18px;
+}
+.all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .price-wrap mat-icon {
+    color: #fff;
+}
+.mat-icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+}
+
+/* LEFT SIDE */
+.filter-sidenav {
+    width: 280px;
+    /* border: 0!important; */
+    border: 1px solid black;
+    flex: 1 1 100%; 
+    box-sizing: border-box; 
+    max-width: 25%;
+}
+

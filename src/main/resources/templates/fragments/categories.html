@@ -4,14 +4,14 @@
 
 </head>
 <body>
-<section id="topCategories" class="border-gray">
+<section id="topCategories" class="border-gray" th:fragment="section">
     <h4>Categories</h4>
     <div class="cat-list">
         <ul>
-            <li><a class="noborder" href="shop">Show All</a></li>
-            <li><a  href="shop">Headphones</a></li>
-            <li><a  href="shop">Laptops</a></li>
-            <li><a  href="shop">Smart phones</a></li>
+            <li><a class="noborder" th:href="@{/product}">Show All</a></li>
+            <li th:each="category : ${categories}">
+                <a th:text="${category.name}" th:href="@{/product(category=${category.id})}"></a>
+            </li>
         </ul>
     </div>
 </section>
