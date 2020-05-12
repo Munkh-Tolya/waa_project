@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <title>Add product</title>
+    <title>Edit product</title>
 </head>
 <body>
 <div class="container" layout:fragment="main-content">
     <!-- MAIN START-->
     <div class="container">
-        <p class="h2 pt-2">Add New Product</p>
+        <p class="h2 pt-2">Edit Product</p>
         <form th:object="${product}" class="center" enctype="multipart/form-data" method="post">
             <div class="row justify-content-md-center">
                 <div class="col-6">
@@ -56,9 +56,8 @@
                 </div>
             </div>
             <div class="row justify-content-md-end">
-                <button type="reset" class="btn btn-outline-warning m-2">Reset</button>
-                <a th:href="@{/seller/product}" class="btn btn-outline-secondary m-2">Cancel</a>
-                <button id="btn" type="submit" class="btn btn-outline-primary m-2">Sumbit</button>
+                <a th:href="@{/seller/product}" class="btn btn-outline-primary m-2">Cancel</a>
+                <button type="submit" id="btn" class="btn btn-outline-warning m-2">Save</button>
             </div>
         </form>
     </div>

@@ -1,10 +1,12 @@
 package edu.miu.cs545.waa_project.controller;
 
 import edu.miu.cs545.waa_project.WaaProjectApplication;
+import edu.miu.cs545.waa_project.domain.Item;
 import edu.miu.cs545.waa_project.domain.Product;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.exception.InvalidImageUploadException;
 import edu.miu.cs545.waa_project.service.CategoryService;
+import edu.miu.cs545.waa_project.service.ItemService;
 import edu.miu.cs545.waa_project.service.ProductService;
 import edu.miu.cs545.waa_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -34,6 +37,9 @@ public class ProductController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ItemService itemService;
+
     @GetMapping("/product")
     public String list(Model model) {
         model.addAttribute("products", productService.getAll());
@@ -48,14 +54,16 @@ public class ProductController {
     }
 
     /***Product CRUD functionality for Seller: START***/
-    @GetMapping("/seller/addProduct")
+    /***Add product form*/
+    @GetMapping("/seller/product/add")
     public String addProductForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getCategories());
         return "seller/addProduct";
     }
 
-    @PostMapping("/seller/product")
+    /***Save new product*/
+    @PostMapping("/seller/product/add")
     public String saveProduct(Product product) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Seller seller = (Seller)userService.findByEmail(auth.getName());
@@ -97,6 +105,7 @@ public class ProductController {
         return mav;
     }
 
+    /***Seller product information*/
     @GetMapping("/seller/product")
     public String getProductList(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -105,12 +114,28 @@ public class ProductController {
         return "/seller/productList";
     }
 
+    /***Product delete by Seller*/
     @GetMapping("/seller/product/delete/{id}")
     public String deleteProduct(@PathVariable(value = "id") Long id) {
         Product product = productService.find(id);
-        if (product != null)
+        if (product != null && itemService.findByProduct(product) == null){
+            System.out.println(itemService.findByProduct(product).getPrice());
             productService.delete(product);
+        } else {
+            System.out.println("Cannot delete");
+        }
+
         return "redirect:/seller/product";
+    }
+
+    /***Product edit by Seller*/
+    @GetMapping(value = {"/seller/product/{id}"})
+    public String editProduct(@PathVariable(value = "id", required = false) Long id, Model model, RedirectAttributes rd) {
+        if (id != null) {
+            model.addAttribute("product", productService.find(id));
+            model.addAttribute("categories", categoryService.getCategories());
+        }
+        return "seller/editProduct";
     }
 
     /***Product CRUD functionality for Seller: END***/
