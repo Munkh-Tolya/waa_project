@@ -1,56 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org" >
+
 <head>
-    <title>Approve Product</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>Home Page</title>
+    <!--   Өөрийн page дээ custom CSS ээ нэмэх бол ингээд нэмчих юм байна
+        <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/main.css}">-->
 </head>
 <body>
+<div class="container" layout:fragment="main-content">
+    <!-- BUYER HOME START-->
 <div class="container">
     <h1>Products which were registred by Sellers</h1>
-    <div class="row col-md-9 table-responsive">
+    <div class="row col-md-12 table-responsive">
         <table id="customerTable" class="table">
-            <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Seller's First Name</th>
-                <th>Seller's Last Name</th>
-                <th>Seller's email </th>
-                <th>Product's price</th>
-                <th>Product's quantity</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="product, rowStat: ${products}"
-                th:style="${rowStat.odd} ? 'color: gray' : 'color: blue;'">
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.seller.firstName}"></td>
-                <td th:text="${product.seller.lastName}"></td>
-                <td th:text="${product.seller.email}"></td>
-                <td th:text="${product.price}"></td>
-                <td th:text="${product.quantity}"></td>
-                <td>
-                    <span th:if="${product.enabled}">Approved</span>
-                    <span th:unless="${product.enabled}">Not Approved</span>
-                </td>
-                <td>
-                    <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/approve}" method="post">
-                        <input type="submit" value="Approve" th:if="${product.isEnabled() ==false}" class="btn btn-success btn-sm"/>
-                    </form>
+            <table class="table table-striped">
+                   <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Seller's First Name</th>
+                            <th>Seller's Last Name</th>
+                            <th>Seller's email </th>
+                            <th>Product's price</th>
+                            <th>Product's quantity</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                  <tbody>
+                     <tr th:each="product: ${products}" >
+                            <td th:text="${product.name}"></td>
+                            <td th:text="${product.seller.firstName}"></td>
+                            <td th:text="${product.seller.lastName}"></td>
+                            <td th:text="${product.seller.email}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.quantity}"></td>
+                            <td>
+                                <span th:if="${product.enabled}">Approved</span>
+                                <span th:unless="${product.enabled}">Not Approved</span>
+                            </td>
+                            <td>
+                                <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/approve}" method="post">
+                                    <input type="submit" value="Approve" th:if="${product.isEnabled() ==false}" class="btn btn-success btn-sm"/>
+                                </form>
 
-                    <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/reject}" method="post">
-                        <input type="submit" value="Reject" th:if="${product.isEnabled()== true}" class="btn btn-danger btn-sm mt-2"/>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
+                                <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/reject}" method="post">
+                                    <input type="submit" value="Reject" th:if="${product.isEnabled()== true}" class="btn btn-danger btn-sm mt-2"/>
+                                </form>
+                            </td>
+                      </tr>
+                   </tbody>
+            </table>
         </table>
     </div>
 </div>
 
+    <!-- BUYER HOME END-->
+</div>
+
+</body>
+</html>
