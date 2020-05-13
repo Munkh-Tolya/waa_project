@@ -65,5 +65,13 @@ public class Buyer extends User{
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
+    public List<Seller> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<Seller> following) {
+        this.following = following;
+    }
 }
 

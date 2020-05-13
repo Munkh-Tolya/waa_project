@@ -147,7 +147,6 @@ public class ProductController {
         mav.setViewName("seller/exceptionTemp");
         return mav;
     }
-
     /***Product edit by Seller*/
     @GetMapping(value = {"/seller/product/{id}"})
     public String editProduct(@PathVariable(value = "id", required = false) Long id, Model model, RedirectAttributes rd) {
@@ -156,12 +155,6 @@ public class ProductController {
             model.addAttribute("categories", categoryService.getCategories());
         }
         return "seller/editProduct";
-    }
-
-    @GetMapping("/seller/{id}")
-    public String getSellertById(@PathVariable(value = "id") Long id, Model model) {
-        model.addAttribute("seller", userService.find(id));
-        return "seller/sellerInfo";
     }
     /***Product CRUD functionality for Seller: END***/
 

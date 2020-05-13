@@ -7,22 +7,28 @@
     <!--   Өөрийн page дээ custom CSS ээ нэмэх бол ингээд нэмчих юм байна
         <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/main.css}">-->
 </head>
-<body class="container">
+<body>
 <div class="container" layout:fragment="main-content">
     <!-- BUYER HOME START-->
-    <div class="row">
-        <div class="col-md-4" style="margin-top:10px">
+    <div class="row justify-content-md-center">
+         <div class="col-md-3" align="center">
             <div class="jumbotron">
-                <h1>Seller Info</h1>
-                <p th:text="'First Name: ' +  ${seller.firstName}" />
-                <p th:text="'Last Name: ' +  ${seller.lastName}" />
-                <p th:text="'Email: ' +  ${seller.email}" />
-                <a href="/form" class="btn btn-primary" role="button">Follow Seller</a>
+            <h3>Seller Info</h3>
+            <p th:text="'First Name: ' +  ${seller.firstName}" />
+            <p th:text="'Last Name: ' +  ${seller.lastName}" />
+            <p th:text="'Email: ' +  ${seller.email}" />
+          <!--  <form action="#" th:action="@{/buyer/seller/follow}" th:object="${seller}" method="post">
+                <input type="submit" value="Follow" class="btn btn-sm btn-primary btn-lg"/>
+            </form> -->
+                <form th:action="@{#}" th:method="POST">
+                <input name="cmd" type="hidden" th:value="(${following}) ? @{'unfollow'} : @{'follow'}"/>
+                <input type="submit" id="followBtn" class="btn btn-success"
+                       th:value="(${following}) ? 'Unfollow' : 'Follow' "/>
+                </form>
+
             </div>
         </div>
     </div>
-    <!-- BUYER HOME END-->
 </div>
-
 </body>
 </html>

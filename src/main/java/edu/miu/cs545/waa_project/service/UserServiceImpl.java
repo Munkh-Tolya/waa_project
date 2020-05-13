@@ -1,8 +1,12 @@
 package edu.miu.cs545.waa_project.service;
 
+import edu.miu.cs545.waa_project.domain.Buyer;
+import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.domain.User;
 import edu.miu.cs545.waa_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +30,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User find(Long id) { return userRepository.findById(id).get(); }
+
+    @Override
+    public Seller addFollower(Long sellerId, String action) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Buyer buyer = (Buyer)this.findByEmail("buyer@miu.edu");
+        Seller seller = (Seller) this.find(sellerId);
+        if(action.equals("follow")){
+            buyer.addFollowing(seller);
+        }else{
+            buyer.removeFollowing(seller);
+        }
+        userRepository.save(buyer);
+        return seller;
+    }
+
+    @Override
+    public boolean isFollowing(Long sellerId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Buyer buyer = (Buyer)this.findByEmail("buyer@miu.edu");
+        Buyer result = userRepository.isFollowing(buyer.getId(),sellerId);
+        if(result != null) return true;
+        else return false;
+    }
 
 }
