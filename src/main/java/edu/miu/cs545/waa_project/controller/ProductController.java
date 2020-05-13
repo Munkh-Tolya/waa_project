@@ -6,10 +6,7 @@ import edu.miu.cs545.waa_project.domain.ProductReview;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.exception.InvalidImageUploadException;
 import edu.miu.cs545.waa_project.exception.ProductAlreadyOrderedForDeletion;
-import edu.miu.cs545.waa_project.service.CategoryService;
-import edu.miu.cs545.waa_project.service.ItemService;
-import edu.miu.cs545.waa_project.service.ProductService;
-import edu.miu.cs545.waa_project.service.UserService;
+import edu.miu.cs545.waa_project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.security.core.Authentication;
@@ -35,6 +32,9 @@ public class ProductController {
     ProductService productService;
 
     @Autowired
+    ProductReviewService productReviewService;
+
+    @Autowired
     CategoryService categoryService;
 
     @Autowired
@@ -58,19 +58,6 @@ public class ProductController {
     public String getProductById(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("product", productService.find(id));
         return "product/product";
-    }
-
-    @GetMapping("/product/review/{id}")
-    public String addReviewForm(@ModelAttribute("review") ProductReview review, @PathVariable(value = "id") Long id) {
-        return "product/addReview";
-    }
-    @PostMapping("/product/review/{id}")
-    public String saveReview(@Valid @ModelAttribute("review") ProductReview review, BindingResult bindingResult, @PathVariable(value = "id") Long id) {
-        if (bindingResult.hasErrors()) {
-            return "product/addReview";
-        }
-        System.out.println(review.getComment());
-        return "product/addReview";
     }
 
     /***Product CRUD functionality for Seller: START***/

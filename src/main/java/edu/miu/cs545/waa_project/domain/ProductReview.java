@@ -39,6 +39,13 @@ public class ProductReview {
         this.enabled = false;
         this.createDate = new Date();
     }
+    public ProductReview(int rating, String comment, Buyer buyer, Boolean enabled) {
+        this.rating = rating;
+        this.comment = comment;
+        this.buyer = buyer;
+        this.enabled = enabled;
+        this.createDate = new Date();
+    }
 
     public Long getId() {
         return id;
@@ -76,5 +83,13 @@ public class ProductReview {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

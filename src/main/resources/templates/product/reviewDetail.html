@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <title>Add product review</title>
+</head>
+<body>
+<div class="container justify-content-center" layout:fragment="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div th:if="${productReview}" class="jumbotron">
+                    <h4 class="text-center text-success">Review has been added !</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <b>Rating:</b>
+                        </div>
+                        <div class="col-8">
+                            <span th:text="${productReview.rating}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <b>User:</b>
+                        </div>
+                        <div class="col-8">
+                            <span th:text="${productReview.buyer.firstName}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <b>Status:</b>
+                        </div>
+                        <div class="col-8 text-info">
+                            Pending
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <b>Date:</b>
+                        </div>
+                        <div class="col-8">
+                            <span th:text="${#dates.format(productReview.createDate, 'dd-MMM-yyyy HH:mm:ss')}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <b>Comment:</b>
+                        </div>
+                        <div class="col-8">
+                            <p th:text="${productReview.comment}"></p>
+                        </div>
+                    </div>
+                    <a th:href="@{/product/{id}(id=${long})}" class="btn btn-outline-secondary">Back</a>
+                </div>
+                <div th:if="${productReview == null}">
+                    <h4 class="text-danger">Review has not been added !!!</h4>
+                </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

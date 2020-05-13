@@ -33,16 +33,20 @@
         <div class="col-3">
             <div class="reviews image">
                 <h5>Reviews</h5>
-                <div class="image"  th:each="review : ${product.productReviewList}">
-                    <div class="username"><i class="fas fa-user-circle"></i> <span th:text="${review.buyer.firstName}">Username</span></div>
-                    <div class="comment" th:text="${review.comment}">This product is very good!</div>
-                    <div class="stars">
+                <div th:each="review : ${product.productReviewList}">
+                    <div th:if="${review.isEnabled()}" class="image mt-2">
+                        <div class="username"><i class="fas fa-user-circle"></i> <span th:text="${review.buyer.firstName}">Username</span></div>
+                        <div class="comment" th:text="${review.comment}">This product is very good!</div>
+                        <div class="stars">
                         <span th:each="i : ${#numbers.sequence(1, review.rating)}">
                             <mat-icon class="mat-icon material-icons checked" role="img">star_rate</mat-icon>
                         </span>
-                        <span th:each="i : ${#numbers.sequence(1, 5 - review.rating)}">
-                            <mat-icon class="mat-icon material-icons" role="img">star_rate</mat-icon>
+                            <span th:if="${5 - review.rating > 0}">
+                            <span th:each="i : ${#numbers.sequence(1, 5 - review.rating)}">
+                                <mat-icon class="mat-icon material-icons" role="img">star_rate</mat-icon>
+                            </span>
                         </span>
+                        </div>
                     </div>
                 </div>
                 <a th:href="@{/product/review/{id}(id=${product.id})}">

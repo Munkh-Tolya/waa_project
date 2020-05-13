@@ -66,8 +66,8 @@ public class WaaProjectApplication implements CommandLineRunner {
         /* PRODUCT END */
 
         /* PRODUCT REVIEW START */
-        p1.addReview(new ProductReview(5,"This product is very good!",buyer));
-        p2.addReview(new ProductReview(4,"This product is very good!",buyer));
+        p1.addReview(new ProductReview(5,"This product is very good!",buyer,true));
+        p2.addReview(new ProductReview(4,"This product is very good!",buyer,true));
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6));
         /* PRODUCT REVIEW END */
 

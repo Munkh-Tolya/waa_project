@@ -8,4 +8,5 @@ public interface ProductReviewService {
     public List<ProductReview> getAll();
     public ProductReview save(ProductReview product);
     public ProductReview find(Long id);
+    public ProductReview saveReviewToProduct(ProductReview productReview, Long productId);
 }
