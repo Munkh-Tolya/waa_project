@@ -3,6 +3,8 @@ package edu.miu.cs545.waa_project.domain;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="USER")
@@ -14,15 +16,20 @@ public class User {
     private Long id;
 
     @Column(name="FIRST_NAME")
+    @NotEmpty(message = "*Please provide your first name")
     private String firstName;
 
+
     @Column(name="LAST_NAME")
+    @NotEmpty(message = "*Please provide your last name")
     private String lastName;
 
     @Column(unique = true)
-    @Email
+    @Email(message = "*Please provide a valid Email")
+    @NotBlank(message = "*Please provide a valid Email")
     private String email;
 
+    @NotBlank(message = "*Please provide your password")
     private String password;
 
     public User(){}
