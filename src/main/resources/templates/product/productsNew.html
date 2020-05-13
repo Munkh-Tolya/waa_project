@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title>Product Page</title>
+    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/productDetails.css}">
+</head>
+<body>
+<div id="product" class="container pt-4" layout:fragment="main-content">
+    <div class="row mb-4">
+        <div class="col-4 image">
+            <img th:attr="src=@{'/' + ${product.imagePath}},title=${product.name},alt=${product.name}"/>
+        </div>
+        <div class="col-5">
+            <p>Seller: <a th:text="${product.getSeller().getFirstName()}" th:href="@{/seller/{id}(id=${product.seller.id})}"></a></p>
+            <h2 th:text="${product.name}"></h2>
+            <h4><b>Price: </b> $<span th:text="${product.price}"></span></h4>
+            <div class="horizontal-line">
+                <p class="text-justify" th:text="${product.description}"></p>
+            </div>
+            <div>
+            </div>
+            <form class="form-inline mt-4">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="number" class="form-control" min="1" max="100" value="1">
+                </div>
+                <button class="btn-core btn-blue mb-2" th:value="${product.id}">ADD TO CARD</button>
+            </form>
+        </div>
+        <div class="col-3">
+            Reviews will be here!
+        </div>
+    </div>
+</div>
+</body>
+</html>

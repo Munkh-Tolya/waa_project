@@ -1,22 +1,13 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org" >
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Product Detail</title>
+    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/product.css}">
 </head>
 <body>
-
-<section>
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Product Information</h1>
-        </div>
-    </div>
-</section>
-
-<section class="container">
+<div class="container" layout:fragment="main-content">
     <div class="row">
         <div class="col-md-5">
             <img th:attr="src=@{'/' + ${product.imagePath}},title=${product.name},alt=${product.name}" style="width:400px; height:400px"/>
@@ -47,7 +38,6 @@
             </div>
         </div>
     </div>
-</section>
-
+</div>
 </body>
 </html>

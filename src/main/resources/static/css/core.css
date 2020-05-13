@@ -167,6 +167,7 @@ footer .date{
 .btn-blue{
     background: #346beb;
     color:#fff;
+    border:1px solid #fff;
 }
 .btn-blue:hover{
     background: #fff;

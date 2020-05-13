@@ -53,7 +53,7 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String getProductById(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("product", productService.find(id));
-        return "product/product";
+        return "product/productsNew";
     }
 
     /***Product CRUD functionality for Seller: START***/
