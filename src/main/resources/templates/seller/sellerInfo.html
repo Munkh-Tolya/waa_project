@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title>Home Page</title>
+    <!--   Өөрийн page дээ custom CSS ээ нэмэх бол ингээд нэмчих юм байна
+        <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/main.css}">-->
+</head>
+<body class="container">
+<div class="container" layout:fragment="main-content">
+    <!-- BUYER HOME START-->
+    <div class="row">
+        <div class="col-md-4" style="margin-top:10px">
+            <div class="jumbotron">
+                <h1>Seller Info</h1>
+                <p th:text="'First Name: ' +  ${seller.firstName}" />
+                <p th:text="'Last Name: ' +  ${seller.lastName}" />
+                <p th:text="'Email: ' +  ${seller.email}" />
+                <a href="/form" class="btn btn-primary" role="button">Follow Seller</a>
+            </div>
+        </div>
+    </div>
+    <!-- BUYER HOME END-->
+</div>
+
+</body>
+</html>

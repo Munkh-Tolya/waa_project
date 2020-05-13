@@ -171,6 +171,11 @@ public class ProductController {
         return "seller/editProduct";
     }
 
+    @GetMapping("/seller/{id}")
+    public String getSellertById(@PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("seller", userService.find(id));
+        return "seller/sellerInfo";
+    }
     /***Product CRUD functionality for Seller: END***/
 
 }

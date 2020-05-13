@@ -6,39 +6,49 @@
     <title>Home Page</title>
     <!--   Өөрийн page дээ custom CSS ээ нэмэх бол ингээд нэмчих юм байна
         <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/main.css}">-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container" layout:fragment="main-content">
     <!-- BUYER HOME START-->
 <div class="container">
-    <h1>Comments which werer posted by Buyers</h1>
-    <div class="row col-md-10 table-responsive">
-        <table id="customerTable" class="table">
-            <table class="table table-striped">
-                <thead>
+
+    <h3 align="center">Buyers Comments to approve </h3>
+
+    <div class="card-body">
+        <div class="row col-md-12 table-responsive">
+            <table class="class=table table-bordered table-striped" id="myTable" width="100%" cellspacing="0"  data-toolbar="#toolbar" data-toggle="table" data-maintain-meta-data="true">
+
+                <thead class="thead-dark">
+
                     <tr>
-                        <th>Buyer's First Name</th>
-                        <th>Buyer's Last Name</th>
-                        <th>Buyer's email </th>
-                        <th>Buyer's comment </th>
-                        <th>Status</th>
+                        <th data-sortable="true">Buyer's Full Name</th>
+                        <th data-sortable="true">Buyer's email </th>
+                        <th data-sortable="true">Buyer's comment </th>
+                        <th data-sortable="true">Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="prod: ${productReviews}">
-                        <td th:text="${prod.buyer.firstName}"></td>
-                        <td th:text="${prod.buyer.lastName}"></td>
+                        <td th:text="${prod.buyer.firstName}+' '+${prod.buyer.lastName}"></td>
                         <td th:text="${prod.buyer.email}"></td>
                         <td th:text="${prod.comment}"></td>
                         <td>
                             <span th:if="${prod.enabled}">Approved</span>
-                            <span th:unless="${prod.enabled}">Not Approved</span>
+                            <span th:unless="${prod.enabled}">Pending</span>
                         </td>
 
                         <td>
                             <form action="#" th:action="@{/admin/reviews/} + ${prod.id} + @{/approve}" method="post">
-                                <input type="submit" value="Approve" th:if="${prod.isEnabled() ==false}" class="btn btn-success btn-sm"/>
+                                <input type="submit" value="Approve" th:if="${prod.isEnabled() ==false}" class="btn btn-sm btn-primary"/>
                             </form>
 
                             <form action="#" th:action="@{/admin/reviews/} + ${prod.id} + @{/reject}" method="post">
@@ -48,7 +58,7 @@
                     </tr>
                 </tbody>
             </table>
-        </table>
+        </div>
     </div>
 </div>
 
