@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -42,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                 .rememberMe()
-                    .rememberMeParameter("remember-me")
-                    .rememberMeCookieName("remember-me")
-                    .tokenValiditySeconds(86400)
+                    .rememberMeParameter("keepMe")
+                    .rememberMeCookieName("keepMe")
+                    .tokenValiditySeconds(86400).tokenRepository(tokenRepository())
                 .and()
                 .logout()
                     .logoutUrl("/account/logout")
@@ -54,11 +56,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID")
                     .permitAll()
                 .and()
+                .csrf()
+                .ignoringAntMatchers("/h2-console/**")
+                .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessDenied");
 
         //Those two settings below is to enable access h2 database via browser
-        http.csrf().disable();
+        //http.csrf().disable();
         http.headers().frameOptions().disable();
     }
 
@@ -71,6 +76,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+    }
+
+    @Bean
+    public PersistentTokenRepository tokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
+        jdbcTokenRepositoryImpl.setDataSource(dataSource);
+        return jdbcTokenRepositoryImpl;
     }
 
 }

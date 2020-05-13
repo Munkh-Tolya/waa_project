@@ -39,8 +39,8 @@
                         <input type="password" class="form-control" id="password" name="password" th:placeholder="Password" placeholder="Password">
                     </div>
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
-                        <label class="form-check-label pr-5" for="remember-me" style="font-size: 12px">Remember Me?</label>
+                        <input type="checkbox" class="form-check-input" id="keepMe" name="keepMe">
+                        <label class="form-check-label pr-5" for="keepMe" style="font-size: 12px">Remember Me?</label>
                         <a th:href="@{/account/sign-up}" class="pl-5" style="font-size: 12px; text-decoration: underline; color: red">Sign Up</a>
                     </div>
                     <div class="form-group" th:if="${loginError}">
