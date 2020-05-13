@@ -164,6 +164,9 @@ footer .date{
     font-weight: 700;
     font-size: 14px;
 }
+.btn-core:hover{
+    text-decoration: none;
+}
 .btn-blue{
     background: #346beb;
     color:#fff;

@@ -1,0 +1,72 @@
+/*Shopping Card page styles*/
+.thumb{
+    overflow: hidden;
+    display: block;
+}
+.item .thumb{
+    max-width: 100%;
+}
+.thumb img{
+    max-width: 100%;
+}
+.promoted-products-list .thumb{
+    background-color: #f6f6f6;
+    border-radius: 4px;
+}
+.item .price{
+    margin-top: 5px;
+}
+
+#cart{
+    box-shadow: 2px 2px 6px 0 rgba(0,0,0,.1),0 1px 1px 0 transparent,0 1px 3px 0 rgba(0,0,0,.12);
+    padding:30px 15px;
+    color: rgba(0,0,0,.87);
+    font-size: 21px;
+    font-weight: 500;
+    margin: 50px 0;
+    vertical-align: middle;
+}
+#cart .thead{
+    color: rgba(0,0,0,.54);
+    font-size: 14px;
+    padding: 0 0 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,.87);
+}
+#cart .title{
+    font-size: 14px;
+}
+#cart .col-wrap{
+    padding: 0 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+#cart .thumb{
+    max-width:100px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+#cart .total{
+    color: #f33927;
+}
+#cart .cart-item{
+    border-bottom: 1px solid #eee;
+}
+#cart .buttons{
+    margin: 30px 0 0;
+    font-size: 14px;
+}
+#cart .buttons .btn{
+    text-transform: none;
+    display: inline-block;
+    width: auto;
+    padding:10px 33px 9px;
+}
+#cart #grandTotal{
+    margin-right: 30px;
+}
+#cart .btn-core{
+    display:inline;
+}

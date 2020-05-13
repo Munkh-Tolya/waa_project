@@ -27,10 +27,12 @@ public class ReviewController {
     }
 
     @PostMapping("/{id}")
-    public String saveReview(@Valid @ModelAttribute("review") ProductReview review, BindingResult bindingResult, @PathVariable(value = "id") Long id, RedirectAttributes redirectAttributes) {
+    public String saveReview(@Valid @ModelAttribute("review") ProductReview review, BindingResult bindingResult,
+                             @PathVariable(value = "id") Long id, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "product/addReview";
         }
+        System.out.println("gg");
         ProductReview prReview = productReviewService.saveReviewToProduct(review,id);
         redirectAttributes.addFlashAttribute(prReview);
         redirectAttributes.addFlashAttribute(id);
