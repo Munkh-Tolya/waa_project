@@ -5,6 +5,7 @@ import edu.miu.cs545.waa_project.domain.Item;
 import edu.miu.cs545.waa_project.domain.Product;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.exception.InvalidImageUploadException;
+import edu.miu.cs545.waa_project.exception.ProductAlreadyOrderedForDeletion;
 import edu.miu.cs545.waa_project.service.CategoryService;
 import edu.miu.cs545.waa_project.service.ItemService;
 import edu.miu.cs545.waa_project.service.ProductService;
@@ -15,12 +16,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.File;
 import java.util.UUID;
 
@@ -41,12 +44,8 @@ public class ProductController {
     private ItemService itemService;
 
     @GetMapping("/product")
-    public String list(Model model, @RequestParam(required = false) String category) {
-        if(category!=null){
-            model.addAttribute("products", productService.getByCategory(Integer.parseInt(category)));
-        }else{
-            model.addAttribute("products", productService.getAll());
-        }
+    public String list(Model model) {
+        model.addAttribute("products", productService.getAll());
         model.addAttribute("categories", categoryService.getCategories());
         return "product/products";
     }
@@ -68,9 +67,13 @@ public class ProductController {
 
     /***Save new product*/
     @PostMapping("/seller/product/add")
-    public String saveProduct(Product product) {
+    public String saveProduct(@Valid Product product, BindingResult bindingResult) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Seller seller = (Seller)userService.findByEmail(auth.getName());
+
+        if (bindingResult.hasErrors()) {
+            return "seller/addProduct";
+        }
 
         // Upload image part with controller level exception handler
         MultipartFile productImage = product.getProductImage();
@@ -104,8 +107,8 @@ public class ProductController {
     @ExceptionHandler(InvalidImageUploadException.class)
     public ModelAndView handleError(HttpServletRequest request, InvalidImageUploadException exception) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("invalidImage", exception.getFullMessage());
-        mav.setViewName("seller/image-upload-error");
+        mav.addObject("msg", exception.getFullMessage());
+        mav.setViewName("seller/exceptionTemp");
         return mav;
     }
 
@@ -122,13 +125,23 @@ public class ProductController {
     @GetMapping("/seller/product/delete/{id}")
     public String deleteProduct(@PathVariable(value = "id") Long id) {
         Product product = productService.find(id);
-        if (product != null && itemService.findTopByProduct(product) == null){
-            productService.delete(product);
-        } else {
-            System.out.println("Cannot delete");
-        }
 
+        if (product == null || itemService.findTopByProduct(product) != null)
+            throw new ProductAlreadyOrderedForDeletion();
+
+        productService.delete(product);
         return "redirect:/seller/product";
+    }
+
+    //Exception handler for delete product which is already ordered
+    @ExceptionHandler(ProductAlreadyOrderedForDeletion.class)
+    public ModelAndView handleError(HttpServletRequest request, ProductAlreadyOrderedForDeletion exception) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("msg", exception.getFullMessage());
+        mav.addObject("exception", exception);
+        mav.addObject("url", request.getRequestURL());
+        mav.setViewName("seller/exceptionTemp");
+        return mav;
     }
 
     /***Product edit by Seller*/

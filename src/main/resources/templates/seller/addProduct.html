@@ -9,26 +9,32 @@
     <div class="container">
         <p class="h2 pt-2">Add New Product</p>
         <form th:object="${product}" class="center" enctype="multipart/form-data" method="post">
+<!--            <ul th:if="${#fields.hasErrors('*')}">-->
+<!--                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" style="color: red">Input is incorrect</li>-->
+<!--            </ul>-->
             <div class="row justify-content-md-center">
                 <div class="col-6">
                     <div class="form-group">
                         <label>Product Name</label>
                         <input type="text" id="name" name="name" class="form-control" th:field="*{name}">
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError" style="color: red"></p>
                         <small class="form-text text-muted">Enter your product name</small>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label>Unit Price</label>
-                        <input type="text" id="price" name="price" class="form-control" th:field="*{price}">
+                        <input type="text" id="price" name="price" class="form-control" th:field="*{price}" placeholder="0">
+                        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:errorclass="fieldError" style="color: red"></p>
                         <small class="form-text text-muted">Enter you product unit price</small>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label>Quantity in Stock</label>
-                        <input type="text" id="quantity" name="quantity" class="form-control" th:field="*{quantity}">
+                        <input type="text" id="quantity" name="quantity" class="form-control" th:field="*{quantity}" placeholder="0">
                         <small class="form-text text-muted">Quantity of product in your stock</small>
+                        <p th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:errorclass="fieldError" style="color: red"></p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -38,6 +44,7 @@
                             <option value="0" selected disabled>Select a category</option>
                             <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
                         </select>
+                        <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}" th:errorclass="fieldError" style="color: red"></p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -45,6 +52,7 @@
                         <label>Product Description</label>
                         <textarea id="description" th:rows="3" name="description" class="form-control" th:field="*{description}"></textarea>
                         <small class="form-text text-muted">Enter your product description</small>
+                        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="fieldError" style="color: red"></p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -58,7 +66,7 @@
             <div class="row justify-content-md-end">
                 <button type="reset" class="btn btn-outline-warning m-2">Reset</button>
                 <a th:href="@{/seller/product}" class="btn btn-outline-secondary m-2">Cancel</a>
-                <button id="btn" type="submit" class="btn btn-outline-primary m-2">Sumbit</button>
+                <button id="btn" type="submit" class="btn btn-outline-primary m-2">Submit</button>
             </div>
         </form>
     </div>

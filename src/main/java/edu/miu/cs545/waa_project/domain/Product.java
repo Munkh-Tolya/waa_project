@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +14,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
     private String name;
 
+    @NotEmpty(message = "{Product.Description.Validation}")
     @Lob
     private String description;
+
+    @Min(value = 0, message = "{Min.Product.unitPrice.validation}")
     private double price;
+
     private String imagePath;
+
+    @Min(value = 1, message = "{Min.Product.quantity.validation}")
     private int quantity;
     private boolean enabled;
 
@@ -28,6 +36,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @NotNull(message = "{Product.Category.Validation}")
     private Category category;
 
     @ManyToOne
