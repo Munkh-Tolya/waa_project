@@ -34,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**", "/h2-console/**").permitAll()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .failureUrl("/login?error=true")
+                    .loginPage("/account/login")
+                    .failureUrl("/account/login-error")
                     .defaultSuccessUrl("/")
                     .usernameParameter("email")
                     .passwordParameter("password")
@@ -47,15 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .tokenValiditySeconds(86400)
                 .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login?logout=true")
+                    .logoutUrl("/account/logout")
+                    .logoutSuccessUrl("/account/login?logout=true")
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
                     .deleteCookies("JSESSIONID")
                     .permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/denied");
+                .accessDeniedPage("/accessDenied");
 
         //Those two settings below is to enable access h2 database via browser
         http.csrf().disable();
