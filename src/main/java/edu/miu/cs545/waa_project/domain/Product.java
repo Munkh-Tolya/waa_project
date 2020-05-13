@@ -131,4 +131,10 @@ public class Product {
     public void removeReview(ProductReview review){
         productReviewList.remove(review);
     }
+    public List<ProductReview> getProductReviewList() {
+        return productReviewList;
+    }
+    public void setProductReviewList(List<ProductReview> productReviewList) {
+        this.productReviewList = productReviewList;
+    }
 }

@@ -1,8 +1,8 @@
 package edu.miu.cs545.waa_project.controller;
 
 import edu.miu.cs545.waa_project.WaaProjectApplication;
-import edu.miu.cs545.waa_project.domain.Item;
 import edu.miu.cs545.waa_project.domain.Product;
+import edu.miu.cs545.waa_project.domain.ProductReview;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.exception.InvalidImageUploadException;
 import edu.miu.cs545.waa_project.exception.ProductAlreadyOrderedForDeletion;
@@ -44,8 +44,12 @@ public class ProductController {
     private ItemService itemService;
 
     @GetMapping("/product")
-    public String list(Model model) {
-        model.addAttribute("products", productService.getAll());
+    public String list(Model model, @RequestParam(required = false) String category) {
+        if(category!=null){
+            model.addAttribute("products", productService.getByCategory(Integer.parseInt(category)));
+        }else{
+            model.addAttribute("products", productService.getAll());
+        }
         model.addAttribute("categories", categoryService.getCategories());
         return "product/products";
     }
@@ -53,7 +57,20 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String getProductById(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("product", productService.find(id));
-        return "product/productsNew";
+        return "product/product";
+    }
+
+    @GetMapping("/product/review/{id}")
+    public String addReviewForm(@ModelAttribute("review") ProductReview review, @PathVariable(value = "id") Long id) {
+        return "product/addReview";
+    }
+    @PostMapping("/product/review/{id}")
+    public String saveReview(@Valid @ModelAttribute("review") ProductReview review, BindingResult bindingResult, @PathVariable(value = "id") Long id) {
+        if (bindingResult.hasErrors()) {
+            return "product/addReview";
+        }
+        System.out.println(review.getComment());
+        return "product/addReview";
     }
 
     /***Product CRUD functionality for Seller: START***/

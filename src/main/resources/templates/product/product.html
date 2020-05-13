@@ -3,38 +3,53 @@
       xmlns:th="http://www.thymeleaf.org" >
 
 <head>
-    <title>Product Detail</title>
-    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/product.css}">
+    <title>Product Page</title>
+    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/productDetails.css}">
 </head>
 <body>
-<div class="container" layout:fragment="main-content">
-    <div class="row">
-        <div class="col-md-5">
-            <img th:attr="src=@{'/' + ${product.imagePath}},title=${product.name},alt=${product.name}" style="width:400px; height:400px"/>
+<div id="product" class="container pt-4" layout:fragment="main-content">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="image">
+                <img th:attr="src=@{'/' + ${product.imagePath}},title=${product.name},alt=${product.name}"/>
+            </div>
         </div>
-        <div class="col-md-5">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h3 th:text="${product.name}"></h3>
-                    <p th:text="${product.description}"></p>
-                    <p>
-                        <strong>Category: </strong> <span th:text="${product.category}" th:remove="tag"></span>
-                    </p>
-                    <p>
-                        <strong>Available units in stock: </strong><span th:text="${product.quantity}" th:remove="tag"></span>
-                    </p>
-                    <p>
-                        <strong>Seller: </strong><span th:text="${product.quantity}" th:remove="tag"></span>
-                    </p>
-                    <h4><span th:text="${product.price}" th:remove="tag"></span>USD</h4>
-                    <p>
-                        <a th:href="@{/product/list}" class="btn btn-default">
-                            <span class="glyphicon-hand-left glyphicon"></span> Back
-                        </a>
-                        <a href="#" class="btn btn-warning btn-large order-btn" th:data="${product.id}">
-                            <span class="glyphicon-shopping-cart glyphicon"></span> Order Now </a>
-                    </p>
+        <div class="col-5">
+            <p>Seller: <a th:text="${product.getSeller().getFirstName()}" th:href="@{/seller/{id}(id=${product.seller.id})}"></a></p>
+            <h2 th:text="${product.name}"></h2>
+            <h4><b>Price: </b> $<span th:text="${product.price}"></span></h4>
+            <div class="horizontal-line">
+                <p class="text-justify" th:text="${product.description}"></p>
+            </div>
+            <div>
+            </div>
+            <div class="form-inline mt-4">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="number" class="form-control" id="inputQty" min="1" max="100" value="1">
                 </div>
+                <button class="btn-core btn-blue mb-2" th:value="${product.id}" id="addToCard">ADD TO CARD</button>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="reviews image">
+                <h5>Reviews</h5>
+                <div class="image"  th:each="review : ${product.productReviewList}">
+                    <div class="username"><i class="fas fa-user-circle"></i> <span th:text="${review.buyer.firstName}">Username</span></div>
+                    <div class="comment" th:text="${review.comment}">This product is very good!</div>
+                    <div class="stars">
+                        <span th:each="i : ${#numbers.sequence(1, review.rating)}">
+                            <mat-icon class="mat-icon material-icons checked" role="img">star_rate</mat-icon>
+                        </span>
+                        <span th:each="i : ${#numbers.sequence(1, 5 - review.rating)}">
+                            <mat-icon class="mat-icon material-icons" role="img">star_rate</mat-icon>
+                        </span>
+                    </div>
+                </div>
+                <a th:href="@{/product/review/{id}(id=${product.id})}">
+                    <button class="btn-core btn-blue mt-2">
+                        <span class="fas fa-edit"></span> ADD REVIEW
+                    </button>
+                </a>
             </div>
         </div>
     </div>

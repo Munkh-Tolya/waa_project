@@ -1,6 +1,10 @@
 package edu.miu.cs545.waa_project.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -12,7 +16,12 @@ public class ProductReview {
     @OneToOne
     private Buyer buyer;
 
+    @Min(0)
+    @Max(5)
     private int rating;
+
+    @NotEmpty(message = "{Review.comment.validation}")
+    @Size(min=10,message = "{Review.comment.size}")
     @Lob
     private String comment;
 
@@ -23,7 +32,7 @@ public class ProductReview {
 
     public ProductReview(){}
 
-    public ProductReview( int rating, String comment, Buyer buyer) {
+    public ProductReview(int rating, String comment, Buyer buyer) {
         this.rating = rating;
         this.comment = comment;
         this.buyer = buyer;

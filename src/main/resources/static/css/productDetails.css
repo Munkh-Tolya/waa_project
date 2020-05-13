@@ -97,3 +97,33 @@
 .carousel-inner .carousel-item-right, .carousel-inner .carousel-item-left {
 	transform: translateX(0);
 }
+
+/*.reviews .checked{*/
+/*	color: orange;*/
+/*}*/
+
+.reviews .stars {
+	margin: 0px;
+}
+.reviews .stars .checked{
+	color: orange;
+}
+.reviews .stars mat-icon {
+	font-size: 17px;
+	line-height: 17px;
+	height: 17px;
+	width: 17px;
+	vertical-align: middle;
+}
+.reviews .rate-review{
+	font-size:14px;
+}
+.reviews .username{
+	font-size:0.9rem;
+	margin-bottom:0.5rem;
+	font-family: 'Balsamiq Sans', cursive;
+}
+.reviews .comment{
+	margin-bottom:0.5rem;
+	font-size: 0.8rem;
+}
