@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title>Cart</title>
+    <!--   Өөрийн page дээ custom CSS ээ нэмэх бол ингээд нэмчих юм байна
+        <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/main.css}">-->
+    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/cart.css}">
+</head>
+<body>
+<section id="cart" class="active mb30" layout:fragment="main-content">
+
+    <div class="thead row text-center">
+        <div class="col-md-2 col-sm-4 col-xs-6">Product	</div>
+        <div class="col-md-2 col-sm-4 col-xs-6">Name</div>
+        <div class="col-md-2 col-sm-4 col-xs-6">Price</div>
+        <div class="col-md-2 col-sm-4 col-xs-6">Quantity</div>
+        <div class="col-md-2 col-sm-4 col-xs-6">Total</div>
+        <div class="col-md-2 col-sm-4 col-xs-6">Action</div>
+    </div>
+
+    <div class="cart-item row mb20" id="item-1">
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <a href="/wap_project/product?productId=1" class="thumb" target="_blank">
+                <img src="uploads/pro1.png">
+            </a>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <a href="/wap_project/product?productId=1" class="title">ONTEC E Headset</a>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <div class="price">$175.0</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <div class="quantity">3</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <div class="price total">$525.0</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <a href="/wap_project/remove" class="remove" data-item="1"><i class="material-icons">close</i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="cart-item row mb20" id="item-2">
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <a href="/wap_project/product?productId=2" class="thumb" target="_blank">
+                <img src="uploads/pro2.png">
+            </a>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <a href="/wap_project/product?productId=2" class="title">Solo Headset</a>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <div class="price">$235.0</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <div class="quantity">2</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <div class="price total">$470.0</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-wrap">
+                <a href="/wap_project/remove" class="remove" data-item="2"><i class="material-icons">close</i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons row">
+        <div class="col-md-5 col-xs-12">
+            <a href="/wap_project/" class="btn-core btn-blue">Continue shopping</a>
+        </div>
+        <div class="col-md-7 col-xs-12 text-right">
+            <span class="grandTotal">Grand total: $<span id="grandTotal">995.0</span></span>
+            <a href="/wap_project/checkout" class="btn-core btn-blue">Proceed To Checkout</a>
+        </div>
+    </div>
+</section>
+</div>
+
+</body>
+</html>
