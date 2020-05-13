@@ -237,3 +237,17 @@ footer .date{
 .mt30{
     margin-top: 30px;
 }
+
+
+/* To show notification. Added by Munkhuu */
+#notify {
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    background-color: #6c757d;
+    border-color: #6c757d;
+    padding:6px;
+    color:white;
+    border-radius:10px;
+}

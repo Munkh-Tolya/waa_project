@@ -15,18 +15,15 @@ import java.security.Principal;
 
 @Component
 public class Interceptor implements HandlerInterceptor {
+
    @Autowired
    private UserService userService;
-
-//   @Autowired
-//   private UserService userService;
 
    @Override
    public void postHandle(
       HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
       Principal principal = request.getUserPrincipal();
-      if(principal != null){
-         System.out.println("gg");
+      if(principal != null && modelAndView != null){
          User user = userService.findByEmail(principal.getName());
          if(user != null){
             modelAndView.getModelMap().addAttribute("userName", user.getFirstName() + " " + user.getLastName());
