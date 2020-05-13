@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="USER")
@@ -30,6 +31,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "*Please provide your password")
+    @Size(min = 4, message = "*Password length must be at least 4")
     private String password;
 
     public User(){}

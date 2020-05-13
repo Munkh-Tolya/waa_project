@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +47,7 @@ public class AccountController {
     }
 
     @PostMapping("/sign-up")
-    public String createNewUser(@Valid User user, BindingResult bindingResult,Model model, @RequestParam String role) {
+    public String createNewUser(@Valid User user, BindingResult bindingResult, @RequestParam String role, RedirectAttributes redirectAttributes) {
         User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult.rejectValue("email", "error.user","Email address has been registered already");
@@ -73,8 +74,8 @@ public class AccountController {
             userService.save(seller);
         }
 
-        model.addAttribute("successMessage", "User has been registered successfully");
-        return "account/sign-up";
+        redirectAttributes.addFlashAttribute("successMessage", "User has been registered successfully");
+        return "redirect:/account/sign-up";
     }
 
     @GetMapping("/logout")
