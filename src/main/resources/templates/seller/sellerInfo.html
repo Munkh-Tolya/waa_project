@@ -6,6 +6,16 @@
     <title>Home Page</title>
     <!--   Өөрийн page дээ custom CSS ээ нэмэх бол ингээд нэмчих юм байна
         <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/main.css}">-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div class="container" layout:fragment="main-content">
@@ -25,10 +35,37 @@
                 <input type="submit" id="followBtn" class="btn btn-success"
                        th:value="(${following}) ? 'Unfollow' : 'Follow' "/>
                 </form>
-
             </div>
         </div>
+
     </div>
+
+    <div class="card-body">
+        <div class="row col-md-12 table-responsive">
+            <table class="class=table table-bordered table-striped" id="myTable" width="100%" cellspacing="0"  data-toolbar="#toolbar" data-toggle="table" data-maintain-meta-data="true">
+
+                <thead class="thead-dark">
+                <tr>
+                    <th data-sortable="true">Product Name</th>
+                    <th data-sortable="true">Price</th>
+                    <th data-sortable="true">Quantity</th>
+                    <th data-sortable="true">This seller's product description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product: ${seller.getProducts()}" >
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.description}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
 </div>
 </body>
 </html>
