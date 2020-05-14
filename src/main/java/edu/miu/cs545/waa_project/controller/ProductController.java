@@ -169,7 +169,7 @@ public class ProductController {
         Seller seller = (Seller) userService.findByEmail(auth.getName());
 
         if (bindingResult.hasErrors()) {
-            return "seller/addProduct";
+            return "seller/editProduct";
         }
 
         MultipartFile productImage = product.getProductImage();

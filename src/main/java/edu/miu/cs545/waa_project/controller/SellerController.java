@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,11 +39,11 @@ public class SellerController {
         return "seller/orders";
     }
 
-    @PostMapping("/orders")
+    @PostMapping("/orders/{id}")
     public String getOrderById(Order order) {
-//        Order order = orderService.findById(id);
         System.out.println(order.getId());
         System.out.println(order.getStatus());
-        return "seller/orderDetails";
+        orderService.updateOrderStatusById(order.getId(), order.getStatus());
+        return "redirect:/seller/orders";
     }
 }

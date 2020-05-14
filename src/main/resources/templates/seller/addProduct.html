@@ -17,16 +17,16 @@
                     <div class="form-group">
                         <label>Product Name</label>
                         <input type="text" id="name" name="name" class="form-control" th:field="*{name}">
-                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError" style="color: red"></p>
                         <small class="form-text text-muted">Enter your product name</small>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError" style="color: red"></p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label>Unit Price</label>
                         <input type="text" id="price" name="price" class="form-control" th:field="*{price}">
-                        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:errorclass="fieldError" style="color: red"></p>
                         <small class="form-text text-muted">Enter you product unit price</small>
+                        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:errorclass="fieldError" style="color: red"></p>
                     </div>
                 </div>
                 <div class="col-6">
