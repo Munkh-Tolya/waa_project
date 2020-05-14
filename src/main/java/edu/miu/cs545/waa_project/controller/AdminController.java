@@ -5,14 +5,12 @@ import edu.miu.cs545.waa_project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import edu.miu.cs545.waa_project.domain.*;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
+@SessionAttributes({ "userName" })
 public class AdminController {
     @Autowired
     private ProductService productService;

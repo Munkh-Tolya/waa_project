@@ -13,6 +13,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/cart")
+@SessionAttributes({ "userName" })
 public class CartController {
     @Autowired
     CartService cartService;

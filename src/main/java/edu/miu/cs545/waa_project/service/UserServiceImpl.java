@@ -63,6 +63,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return this.findByEmail(auth.getName());
+    }
+
+    @Override
     public List<Order> getOrdersBySeller(Seller seller) {
         return userRepository.getOrdersBySeller(seller);
     }

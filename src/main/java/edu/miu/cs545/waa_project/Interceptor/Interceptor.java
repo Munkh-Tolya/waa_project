@@ -23,15 +23,11 @@ public class Interceptor implements HandlerInterceptor {
    public void postHandle(
       HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
       Principal principal = request.getUserPrincipal();
-      if(principal != null && modelAndView != null){
+      if(request.isUserInRole("ROLE_BUYER") && principal != null && modelAndView != null){
          User user = userService.findByEmail(principal.getName());
          if(user != null){
-            modelAndView.getModelMap().addAttribute("userName", user.getFirstName() + " " + user.getLastName());
-            if(request.isUserInRole("ROLE_BUYER")){
-               Buyer buyer = (Buyer)user;
-               modelAndView.getModelMap().addAttribute("shoppingCart",buyer.getCardItems());
-               System.out.println(buyer.getCardItems());
-            }
+            Buyer buyer = (Buyer)user;
+            modelAndView.getModelMap().addAttribute("shoppingCart",buyer.getCardItems());
          }
       }
    }

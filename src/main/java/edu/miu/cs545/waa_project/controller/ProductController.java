@@ -25,6 +25,7 @@ import java.util.UUID;
 
 
 @Controller
+@SessionAttributes({ "userName"})
 public class ProductController {
 
     @Autowired
@@ -42,6 +43,11 @@ public class ProductController {
     @Autowired
     private ItemService itemService;
 
+    @ModelAttribute
+    public void commonAttributes(Model model){
+        model.addAttribute("categories", categoryService.getCategories());
+    }
+
     @GetMapping("/product")
     public String list(Model model, @RequestParam(required = false) String category) {
         if (category != null) {
@@ -49,7 +55,6 @@ public class ProductController {
         } else {
             model.addAttribute("products", productService.getAll());
         }
-        model.addAttribute("categories", categoryService.getCategories());
         return "product/products";
     }
 
@@ -64,7 +69,6 @@ public class ProductController {
     @GetMapping("/seller/product/add")
     public String addProductForm(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("categories", categoryService.getCategories());
         return "seller/addProduct";
     }
 
@@ -75,7 +79,6 @@ public class ProductController {
         Seller seller = (Seller) userService.findByEmail(auth.getName());
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("categories", categoryService.getCategories());
             return "seller/addProduct";
         }
 
@@ -153,7 +156,6 @@ public class ProductController {
     public String editRequest(@PathVariable(value = "id", required = false) Long id, Model model) {
         if (id != null) {
             model.addAttribute("product", productService.find(id));
-            model.addAttribute("categories", categoryService.getCategories());
         }
 
         return "seller/editProduct";
@@ -167,7 +169,6 @@ public class ProductController {
         Seller seller = (Seller) userService.findByEmail(auth.getName());
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("categories", categoryService.getCategories());
             return "seller/addProduct";
         }
 

@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/product/review")
+@SessionAttributes({ "userName" })
 public class ReviewController {
     @Autowired
     ProductReviewService productReviewService;
@@ -32,7 +33,6 @@ public class ReviewController {
         if (bindingResult.hasErrors()) {
             return "product/addReview";
         }
-        System.out.println("gg");
         ProductReview prReview = productReviewService.saveReviewToProduct(review,id);
         redirectAttributes.addFlashAttribute(prReview);
         redirectAttributes.addFlashAttribute(id);

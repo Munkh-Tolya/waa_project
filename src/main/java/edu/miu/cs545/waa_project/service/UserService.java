@@ -16,5 +16,6 @@ public interface UserService {
     public Seller addFollower(Long sellerId, String action);
     public boolean isFollowing(Long sellerId);
     public Buyer getAuthenticatedBuyer();
+    public User getAuthenticatedUser();
     List<Order> getOrdersBySeller(Seller seller);
 }
