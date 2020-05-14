@@ -9,64 +9,80 @@
     <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/cart.css}">
 </head>
 <body>
-<section id="cart" class="active mb30" layout:fragment="main-content">
+<div class="container" layout:fragment="main-content">
+    <a th:href="@{'/product'}" class="btn-core btn-blue">Continue shopping</a>
+        <div th:each="cartDTO : ${cartDTOS}">
+            <h5 class="mt-4">
+                <b>Seller:</b>
+                <span th:text="${cartDTO.sellerName}"></span>
+            </h5>
+            <section id="cart" class="active mb30">
 
-    <div class="thead row text-center">
-        <div class="col-md-2 col-sm-4 col-xs-6">Product	</div>
-        <div class="col-md-2 col-sm-4 col-xs-6">Name</div>
-        <div class="col-md-2 col-sm-4 col-xs-6">Price</div>
-        <div class="col-md-2 col-sm-4 col-xs-6">Quantity</div>
-        <div class="col-md-2 col-sm-4 col-xs-6">Total</div>
-        <div class="col-md-2 col-sm-4 col-xs-6">Action</div>
-    </div>
-    <div th:each="item : ${items}" class="cart-item row mb20" id="item-1">
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <a th:href="@{/product/{id}(id=${item.product.id})}" class="thumb" target="_blank">
-                <img th:src="${item.product.imagePath}"/>
-            </a>
+                <div class="thead row text-center">
+                    <div class="col-md-2 col-sm-4 col-xs-6">Product	</div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">Name</div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">Price</div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">Quantity</div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">Total</div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">Action</div>
+                </div>
+                <div th:each="item : ${cartDTO.items}" class="cart-item row mb20" id="item-1">
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <a th:href="@{/product/{id}(id=${item.product.id})}" class="thumb" target="_blank">
+                            <img th:src="${item.product.imagePath}"/>
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <div class="col-wrap">
+                            <a th:href="@{/product/{id}(id=${item.product.id})}" class="title" th:text="${item.product.name}">PRODUCT NAME</a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <div class="col-wrap">
+                            <div class="price" th:text="${'$' + item.product.price}">$ 0.0</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <div class="col-wrap">
+                            <div class="quantity" th:text="${item.quantity}">0</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <div class="col-wrap">
+                            <div class="price total" th:text="${'$' + item.price}">$0.0</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <div class="col-wrap">
+                            <form th:action="@{'cart/remove'}" method="post">
+                                <input type="hidden" th:value="${item.id}" name="itemId"/>
+                                <a class="remove" onclick='this.parentNode.submit(); return false;'>
+                                    <i class="material-icons">close</i>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons row">
+                    <div class="col-md-5 col-xs-12">
+                    </div>
+                    <div class="col-md-7 col-xs-12 text-right">
+                        <!--                    <span class="grandTotal">Grand total: $<span id="grandTotal" th:text="${grandTotal}">0.0</span></span>-->
+                        <!--                    <a th:href="@{'/order/checkout'}" class="btn-core btn-blue">Proceed To Checkout</a>-->
+                        <form th:action="@{'/order/checkout'}" method="GET">
+                            <span class="grandTotal">Grand total: $<span id="grandTotal" th:text="${cartDTO.total}">0.0</span></span>
+                            <input type="checkbox" class="couponcheck" value="1" name="coupon">
+                            <label class="coupon"> Use coupon </label>
+                            <input type="hidden"  name="sellerId" th:value="${cartDTO.sellerId}">
+                            <button type="submit" class="btn-core btn-blue">Proceed To Checkout</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <a th:href="@{/product/{id}(id=${item.product.id})}" class="title" th:text="${item.product.name}">PRODUCT NAME</a>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <div class="price" th:text="${'$' + item.product.price}">$ 0.0</div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <div class="quantity" th:text="${item.quantity}">0</div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <div class="price total" th:text="${'$' + item.price}">$0.0</div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <form th:action="@{'cart/remove'}" method="post">
-                    <input type="hidden" th:value="${item.id}" name="itemId"/>
-                    <a class="remove" onclick='this.parentNode.submit(); return false;'>
-                        <i class="material-icons">close</i>
-                    </a>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="buttons row">
-        <div class="col-md-5 col-xs-12">
-            <a  th:href="@{'/product'}" class="btn-core btn-blue">Continue shopping</a>
-        </div>
-        <div class="col-md-7 col-xs-12 text-right">
-            <span class="grandTotal">Grand total: $<span id="grandTotal" th:text="${grandTotal}">0.0</span></span>
-            <a th:href="@{'/order/checkout'}" class="btn-core btn-blue">Proceed To Checkout</a>
-        </div>
-    </div>
-</section>
 </div>
+
+
 
 </body>
 </html>

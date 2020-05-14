@@ -23,7 +23,7 @@
     color: rgba(0,0,0,.87);
     font-size: 21px;
     font-weight: 500;
-    margin: 50px 0;
+    margin: 20px 0;
     vertical-align: middle;
 }
 #cart .thead{
@@ -67,9 +67,18 @@
 #cart #grandTotal{
     margin-right: 30px;
 }
-#cart .btn-core{
+.btn-core{
+    width:auto;
     display:inline;
 }
 .remove{
     cursor: pointer;
+}
+
+#cart .coupon{
+    margin-right: 30px;
+}
+
+#cart .couponcheck{
+    vertical-align: middle;
 }

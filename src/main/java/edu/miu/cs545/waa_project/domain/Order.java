@@ -18,11 +18,22 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
-//    @ManyToOne
-//    private Address shippingAddress;
+    @ManyToOne
+    private Buyer buyer;
+
+    @ManyToOne
+    private Seller seller;
+
+    @ManyToOne
+    private Address shippingAddress;
+
+    @ManyToOne
+    private Address billingAddress;
+
 //
 //    @OneToOne
 //    private PaymentInfo paymentInfo;
+
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -32,7 +43,9 @@ public class Order {
     private List<Item> items = new ArrayList<Item>();
 
     public Order(){}
-    public Order(Date updateTime, List<Item> items) {
+    public Order(Date updateTime, List<Item> items, Buyer buyer, Seller seller) {
+        this.setBuyer(buyer);
+        this.setSeller(seller);
         this.updateTime = updateTime;
         this.status = OrderStatus.New;
         this.items = items;
@@ -88,19 +101,21 @@ public class Order {
         this.updateTime = updateTime;
     }
 
-//    public Address getShippingAddress() {
-//        return shippingAddress;
-//    }
-//
-//    public void setShippingAddress(Address shippingAddress) {
-//        this.shippingAddress = shippingAddress;
-//    }
-//
-//    public PaymentInfo getPaymentInfo() {
-//        return paymentInfo;
-//    }
-//
-//    public void setPaymentInfo(PaymentInfo paymentInfo) {
-//        this.paymentInfo = paymentInfo;
-//    }
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
+        this.buyer.addOrder(this);
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+        this.buyer.addOrder(this);
+    }
 }

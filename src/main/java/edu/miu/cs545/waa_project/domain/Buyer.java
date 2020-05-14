@@ -15,8 +15,7 @@ public class Buyer extends User{
     @JoinColumn(name="card_owner_id")
     private List<Item> cardItems = new ArrayList<Item>();
 
-    @OneToMany
-    @JoinColumn(name="buyer_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
     private List<Order> orders = new ArrayList<Order>();
 
     @ManyToMany

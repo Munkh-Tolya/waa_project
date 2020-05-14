@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-5">
-            <p>Seller: <a th:text="${product.getSeller().getFirstName()}" th:href="@{/seller/{id}(id=${product.seller.id})}"></a></p>
+            <p>Seller: <a th:text="${product.getSeller().getFirstName()}" th:href="@{/buyer/seller/{id}(id=${product.seller.id})}"></a></p>
             <h2 th:text="${product.name}"></h2>
             <h4><b>Price: </b> $<span th:text="${product.price}"></span></h4>
             <div class="horizontal-line">

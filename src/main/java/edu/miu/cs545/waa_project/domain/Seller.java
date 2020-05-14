@@ -11,8 +11,7 @@ public class Seller extends User{
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "seller")
     private List<Product> products = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name="seller_id")
+    @OneToMany(mappedBy = "buyer")
     private List<Order> orders = new ArrayList<Order>();
 
     public Seller(){}

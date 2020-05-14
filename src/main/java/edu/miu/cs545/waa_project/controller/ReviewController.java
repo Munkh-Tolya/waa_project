@@ -19,19 +19,19 @@ public class ReviewController {
 
     @GetMapping("/{id}")
     public String addReviewForm(@ModelAttribute("review") ProductReview review, @PathVariable(value = "id") Long id) {
-        return "product/addReview";
+        return "product/add-review";
     }
 
     @GetMapping("/success")
     public String successReview() {
-        return "product/reviewDetail";
+        return "product/review-detail";
     }
 
     @PostMapping("/{id}")
     public String saveReview(@Valid @ModelAttribute("review") ProductReview review, BindingResult bindingResult,
                              @PathVariable(value = "id") Long id, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "product/addReview";
+            return "product/add-review";
         }
         ProductReview prReview = productReviewService.saveReviewToProduct(review,id);
         redirectAttributes.addFlashAttribute(prReview);

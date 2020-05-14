@@ -9,39 +9,15 @@ public class PaymentInfo {
     @GeneratedValue
     private Long id;
 
-    private Long CardNumber;
+    private Long cartNumber;
 
-    private int cvv;
+    private String nameOnCard;
 
-    @Temporal(TemporalType.DATE)
-    private Date expiryDate;
+    private int expriyMonth;
 
-    @OneToOne
-    private Address billingAddress;
+    private int expriryYear;
+
 
     public PaymentInfo(){}
 
-    public Long getCardNumber() {
-        return CardNumber;
-    }
-
-    public void setCardNumber(Long cardNumber) {
-        CardNumber = cardNumber;
-    }
-
-    public int getCvv() {
-        return cvv;
-    }
-
-    public void setCvv(int cvv) {
-        this.cvv = cvv;
-    }
-
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
 }

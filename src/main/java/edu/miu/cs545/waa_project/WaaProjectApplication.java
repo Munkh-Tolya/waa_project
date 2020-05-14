@@ -84,14 +84,10 @@ public class WaaProjectApplication implements CommandLineRunner {
         /* ITEM END */
 
         /* ORDER START */
-        Order o1 = new Order(new Date(), Arrays.asList(i1,i2));
-        Order o2 = new Order(new Date(), Arrays.asList(i4,i5));
+        Order o1 = new Order(new Date(), Arrays.asList(i1,i2), buyer, seller);
+        Order o2 = new Order(new Date(), Arrays.asList(i4,i5), buyer, seller);
         orderRepository.save(o1);
         orderRepository.save(o2);
-        buyer.addOrder(o1);
-        buyer.addOrder(o2);
-        seller.addOrder(o1);
-        seller.addOrder(o2);
 
         /* ORDER END */
 
