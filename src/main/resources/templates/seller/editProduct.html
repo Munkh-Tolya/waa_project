@@ -8,7 +8,7 @@
     <!-- MAIN START-->
     <div class="container">
         <p class="h2 pt-2">Edit Product</p>
-        <form th:object="${product}" class="center" enctype="multipart/form-data" method="post">
+        <form th:action="@{/seller/product/{id}(id=${product.id})}" th:object="${product}" class="center" enctype="multipart/form-data" method="post">
             <div class="row justify-content-md-center">
                 <div class="col-6">
                     <div class="form-group">

@@ -1,8 +1,8 @@
 package edu.miu.cs545.waa_project.controller;
 
 import edu.miu.cs545.waa_project.WaaProjectApplication;
+import edu.miu.cs545.waa_project.domain.Category;
 import edu.miu.cs545.waa_project.domain.Product;
-import edu.miu.cs545.waa_project.domain.ProductReview;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.exception.InvalidImageUploadException;
 import edu.miu.cs545.waa_project.exception.ProductAlreadyOrderedForDeletion;
@@ -17,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -45,9 +44,9 @@ public class ProductController {
 
     @GetMapping("/product")
     public String list(Model model, @RequestParam(required = false) String category) {
-        if(category!=null){
+        if (category != null) {
             model.addAttribute("products", productService.getByCategory(Integer.parseInt(category)));
-        }else{
+        } else {
             model.addAttribute("products", productService.getAll());
         }
         model.addAttribute("categories", categoryService.getCategories());
@@ -71,11 +70,12 @@ public class ProductController {
 
     /***Save new product*/
     @PostMapping("/seller/product/add")
-    public String saveProduct(@Valid Product product, BindingResult bindingResult) {
+    public String saveProduct(@Valid Product product, BindingResult bindingResult, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Seller seller = (Seller)userService.findByEmail(auth.getName());
+        Seller seller = (Seller) userService.findByEmail(auth.getName());
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("categories", categoryService.getCategories());
             return "seller/addProduct";
         }
 
@@ -120,7 +120,7 @@ public class ProductController {
     @GetMapping("/seller/product")
     public String getProductList(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Seller seller = (Seller)userService.findByEmail(auth.getName());
+        Seller seller = (Seller) userService.findByEmail(auth.getName());
         model.addAttribute("products", productService.getProductsBySeller(seller));
         return "/seller/productList";
     }
@@ -147,14 +147,73 @@ public class ProductController {
         mav.setViewName("seller/exceptionTemp");
         return mav;
     }
+
     /***Product edit by Seller*/
     @GetMapping(value = {"/seller/product/{id}"})
-    public String editProduct(@PathVariable(value = "id", required = false) Long id, Model model, RedirectAttributes rd) {
+    public String editRequest(@PathVariable(value = "id", required = false) Long id, Model model) {
         if (id != null) {
             model.addAttribute("product", productService.find(id));
             model.addAttribute("categories", categoryService.getCategories());
         }
+
         return "seller/editProduct";
+    }
+
+    // Save Product for Edit
+    @PostMapping(value = {"/seller/product/{id}"})
+    public String saveProduct(@Valid Product product, BindingResult bindingResult, Model model, @PathVariable(value = "id", required = false) Long id) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Seller seller = (Seller) userService.findByEmail(auth.getName());
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("categories", categoryService.getCategories());
+            return "seller/addProduct";
+        }
+
+        MultipartFile productImage = product.getProductImage();
+        String uploadLocation = new ApplicationHome(WaaProjectApplication.class).getDir() + "\\static\\uploads\\";
+        String imageName = "";
+        if (productImage != null && !productImage.isEmpty()) {
+            if (productImage.getContentType().contains("image/")) {
+                System.out.println("Image is not null. " + productImage.getContentType());
+                try {
+                    imageName = UUID.randomUUID().toString() + "." + productImage.getOriginalFilename();
+                    System.out.println(uploadLocation + imageName);
+                    productImage.transferTo(new File(uploadLocation + imageName));
+                    System.out.println("Image Uploaded");
+                } catch (Exception e) {
+                    throw new RuntimeException("Problem on saving product picture.", e);
+                }
+            } else {
+                throw new InvalidImageUploadException();
+            }
+        } else {
+            System.out.println("Please select image.");
+        }
+
+        Category category = categoryService.getCategoryById(product.getCategory().getId());
+
+        if (id != null) {
+            Product updateProduct = productService.find(id);
+            updateProduct.setName(product.getName());
+            updateProduct.setDescription(product.getDescription());
+            updateProduct.setPrice(product.getPrice());
+            if (!imageName.isEmpty() && !productImage.isEmpty()) {
+                updateProduct.setImagePath("uploads\\" + imageName);
+                updateProduct.setProductImage(product.getProductImage());
+                System.out.println("image Updated!!!!");
+            }
+            updateProduct.setImagePath(updateProduct.getImagePath());
+            updateProduct.setQuantity(product.getQuantity());
+            updateProduct.setCategory(category);
+            productService.save(updateProduct);
+        } else {
+            product.setSeller(seller);
+            product.setImagePath("uploads\\" + imageName);
+            productService.save(product);
+        }
+        return "redirect:/seller/product";
     }
     /***Product CRUD functionality for Seller: END***/
 

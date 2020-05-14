@@ -1,6 +1,7 @@
 package edu.miu.cs545.waa_project.service;
 
 import edu.miu.cs545.waa_project.domain.Buyer;
+import edu.miu.cs545.waa_project.domain.Order;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.domain.User;
 
@@ -15,4 +16,5 @@ public interface UserService {
     public Seller addFollower(Long sellerId, String action);
     public boolean isFollowing(Long sellerId);
     public Buyer getAuthenticatedBuyer();
+    List<Order> getOrdersBySeller(Seller seller);
 }

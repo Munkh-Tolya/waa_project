@@ -1,6 +1,7 @@
 package edu.miu.cs545.waa_project.service;
 
 import edu.miu.cs545.waa_project.domain.Buyer;
+import edu.miu.cs545.waa_project.domain.Order;
 import edu.miu.cs545.waa_project.domain.Seller;
 import edu.miu.cs545.waa_project.domain.User;
 import edu.miu.cs545.waa_project.repository.UserRepository;
@@ -59,6 +60,11 @@ public class UserServiceImpl implements UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Buyer buyer = (Buyer)this.findByEmail("buyer@miu.edu");
         return buyer;
+    }
+
+    @Override
+    public List<Order> getOrdersBySeller(Seller seller) {
+        return userRepository.getOrdersBySeller(seller);
     }
 
 }

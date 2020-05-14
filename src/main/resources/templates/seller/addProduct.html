@@ -8,7 +8,7 @@
     <!-- MAIN START-->
     <div class="container">
         <p class="h2 pt-2">Add New Product</p>
-        <form th:object="${product}" class="center" enctype="multipart/form-data" method="post">
+        <form th:action="@{/seller/product/add}" th:object="${product}" enctype="multipart/form-data" method="post">
 <!--            <ul th:if="${#fields.hasErrors('*')}">-->
 <!--                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" style="color: red">Input is incorrect</li>-->
 <!--            </ul>-->
