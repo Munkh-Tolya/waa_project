@@ -32,6 +32,7 @@ public class FollowController {
     public String getSellertById(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("seller", userService.find(id));
         model.addAttribute("following",userService.isFollowing(id));
+        model.addAttribute("followers",userService.getFollewersNumber(id).size());
         return "seller/sellerInfo";
     }
 

@@ -20,51 +20,59 @@
 <body>
 <div class="container" layout:fragment="main-content">
     <!-- BUYER HOME START-->
-    <div class="row justify-content-md-center">
-         <div class="col-md-3" align="center">
-            <div class="jumbotron">
-            <h3>Seller Info</h3>
-            <p th:text="'First Name: ' +  ${seller.firstName}" />
-            <p th:text="'Last Name: ' +  ${seller.lastName}" />
-            <p th:text="'Email: ' +  ${seller.email}" />
-          <!--  <form action="#" th:action="@{/buyer/seller/follow}" th:object="${seller}" method="post">
-                <input type="submit" value="Follow" class="btn btn-sm btn-primary btn-lg"/>
-            </form> -->
-                <form th:action="@{#}" th:method="POST">
-                <input name="cmd" type="hidden" th:value="(${following}) ? @{'unfollow'} : @{'follow'}"/>
-                <input type="submit" id="followBtn" class="btn btn-success"
-                       th:value="(${following}) ? 'Unfollow' : 'Follow' "/>
-                </form>
+    <section class="mb30">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+
+                <div class="row justify-content-md-center">
+                  <!--   <div class="col-md-3" align="center"> -->
+                        <div class="jumbotron">
+                        <i class="fas fa-user-circle"></i> <span> <b> <i>Seller</i></b></span>
+                        <p th:text="'First Name: ' +  ${seller.firstName}" />
+                        <p th:text="'Last Name: ' +  ${seller.lastName}" />
+                        <p th:text="'Email: ' +  ${seller.email}" />
+                        <p th:text="'Followers:' + ${followers}" />
+                      <!--  <form action="#" th:action="@{/buyer/seller/follow}" th:object="${seller}" method="post">
+                            <input type="submit" value="Follow" class="btn btn-sm btn-primary btn-lg"/>
+                        </form> -->
+                            <form th:action="@{#}" th:method="POST">
+                            <input name="cmd" type="hidden" th:value="(${following}) ? @{'unfollow'} : @{'follow'}"/>
+                            <input type="submit" id="followBtn" class="btn btn-success"
+                                   th:value="(${following}) ? 'Unfollow' : 'Follow' "/>
+                            </form>
+                        </div>
+                 <!--   </div> -->
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                  <!--  <div class="row col-md-12 table-responsive"> -->
+                <section>
+                        <table class="class=table table-bordered table-striped" id="myTable" width="100%" cellspacing="0"  data-toggle="table" data-maintain-meta-data="true">
+
+                            <thead class="thead-dark">
+                            <tr>
+                                <th data-sortable="true">Product Name</th>
+                                <th data-sortable="true">Price</th>
+                                <th data-sortable="true">Quantity</th>
+                                <th data-sortable="true">This seller's product description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="product: ${seller.getProducts()}" >
+                                <td th:text="${product.name}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td th:text="${product.quantity}"></td>
+                                <td th:text="${product.description}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                </section>
+                  <!--  </div> -->
+
             </div>
         </div>
-
-    </div>
-
-    <div class="card-body">
-        <div class="row col-md-12 table-responsive">
-            <table class="class=table table-bordered table-striped" id="myTable" width="100%" cellspacing="0"  data-toolbar="#toolbar" data-toggle="table" data-maintain-meta-data="true">
-
-                <thead class="thead-dark">
-                <tr>
-                    <th data-sortable="true">Product Name</th>
-                    <th data-sortable="true">Price</th>
-                    <th data-sortable="true">Quantity</th>
-                    <th data-sortable="true">This seller's product description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="product: ${seller.getProducts()}" >
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.price}"></td>
-                    <td th:text="${product.quantity}"></td>
-                    <td th:text="${product.description}"></td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-
+    </section>
 
 </div>
 </body>

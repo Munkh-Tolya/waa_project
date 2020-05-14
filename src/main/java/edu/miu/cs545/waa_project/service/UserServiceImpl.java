@@ -73,4 +73,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.getOrdersBySeller(seller);
     }
 
+    @Override
+    public List<Buyer> getFollewersNumber(Long sellerId) {
+        return userRepository.getFollowersNumber(sellerId);
+    }
+
 }
