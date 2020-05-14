@@ -54,4 +54,11 @@ public class UserServiceImpl implements UserService {
         else return false;
     }
 
+    @Override
+    public Buyer getAuthenticatedBuyer() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Buyer buyer = (Buyer)this.findByEmail("buyer@miu.edu");
+        return buyer;
+    }
+
 }

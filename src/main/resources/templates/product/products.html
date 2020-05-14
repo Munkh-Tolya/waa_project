@@ -4,6 +4,8 @@
 
 <head>
     <title>Product Page</title>
+    <meta id="_csrf" th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/product.css}">
 </head>
 <body>

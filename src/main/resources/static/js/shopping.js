@@ -6,8 +6,13 @@ $(function(){
 
 function addProduct(event){
 	event.preventDefault();
+	var token = $("#_csrf").attr("content");
+	var header = $("#_csrf_header").attr("content");
 	const productId = $(this).attr("value");
 	$.ajax("cart/",{
+		beforeSend:function(xhr) {
+			xhr.setRequestHeader(header, token);
+		},
 		method:"POST",
 		data: {"productId":productId,
 				"quantity":1},
@@ -25,9 +30,15 @@ function addProduct(event){
 
 function addMultipleProduct(event){
 	event.preventDefault();
+	var token = $("#_csrf").attr("content");
+	var header = $("#_csrf_header").attr("content");
 	const productId = $(this).attr("value");
 	const quantity = $("#inputQty").val();
+
 	$.ajax("/cart/",{
+		beforeSend:function(xhr) {
+			xhr.setRequestHeader(header, token);
+		},
 		method:"POST",
 		data: {"productId":productId,
 			   "quantity": quantity},

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class CartServiceImpl implements CartService{
     UserService userService;
     @Autowired
     ProductService productService;
+    @Autowired
+    ItemService itemService;
 
     @Override
     public ResponseDTO addItem(Long productId, int quantity) {
@@ -51,5 +55,18 @@ public class CartServiceImpl implements CartService{
             userService.save(buyer);
             return response;
         }
+    }
+
+    @Override
+    public Model getCartItems(Model model) {
+        Buyer buyer = userService.getAuthenticatedBuyer();
+        List<Item> items = buyer.getCardItems();
+        double grandTotal = 0;
+        for(Item i:items){
+            grandTotal += i.getPrice();
+        }
+        model.addAttribute("items",items);
+        model.addAttribute("grandTotal",grandTotal);
+        return model;
     }
 }

@@ -70,3 +70,6 @@
 #cart .btn-core{
     display:inline;
 }
+.remove{
+    cursor: pointer;
+}

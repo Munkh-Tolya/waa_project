@@ -10,7 +10,7 @@
             <div class="col-sm"></div>
             <div class="col-sm">
                 <h4 class="text-center">Create review</h4>
-                <form th:object="${review}" method="post">
+                <form th:action="@{#}" th:object="${review}" method="post">
                     <div class="form-group">
                         <label>Overall rating</label>
                         <input type="number" class="form-control" id="inputQty" min="0" max="10" value="0" th:field="*{rating}">

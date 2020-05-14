@@ -41,8 +41,7 @@ public class ProductReviewServiceImpl implements ProductReviewService {
     public ProductReview saveReviewToProduct(ProductReview productReview, Long productId){
         Product product = productService.find(productId);
         if(product != null){
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            Buyer buyer = (Buyer)userService.findByEmail("buyer@miu.edu");
+            Buyer buyer = userService.getAuthenticatedBuyer();
             productReview.setEnabled(false);
             productReview.setCreateDate(new Date());
             productReview.setBuyer(buyer);

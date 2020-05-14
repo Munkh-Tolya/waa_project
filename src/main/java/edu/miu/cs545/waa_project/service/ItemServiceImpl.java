@@ -15,4 +15,9 @@ public class ItemServiceImpl implements ItemService{
     public Item findTopByProduct(Product product) {
         return itemRepository.findTopByProduct(product);
     }
+
+    @Override
+    public void deleteItemById(Long productId) {
+        itemRepository.deleteById(productId);
+    }
 }

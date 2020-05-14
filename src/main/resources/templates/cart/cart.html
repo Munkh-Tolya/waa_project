@@ -19,81 +19,50 @@
         <div class="col-md-2 col-sm-4 col-xs-6">Total</div>
         <div class="col-md-2 col-sm-4 col-xs-6">Action</div>
     </div>
-
-    <div class="cart-item row mb20" id="item-1">
+    <div th:each="item : ${items}" class="cart-item row mb20" id="item-1">
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <a href="/wap_project/product?productId=1" class="thumb" target="_blank">
-                <img src="uploads/pro1.png">
+            <a th:href="@{/product/{id}(id=${item.product.id})}" class="thumb" target="_blank">
+                <img th:src="${item.product.imagePath}"/>
             </a>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="col-wrap">
-                <a href="/wap_project/product?productId=1" class="title">ONTEC E Headset</a>
+                <a th:href="@{/product/{id}(id=${item.product.id})}" class="title" th:text="${item.product.name}">PRODUCT NAME</a>
             </div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="col-wrap">
-                <div class="price">$175.0</div>
+                <div class="price" th:text="${'$' + item.product.price}">$ 0.0</div>
             </div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="col-wrap">
-                <div class="quantity">3</div>
+                <div class="quantity" th:text="${item.quantity}">0</div>
             </div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="col-wrap">
-                <div class="price total">$525.0</div>
+                <div class="price total" th:text="${'$' + item.price}">$0.0</div>
             </div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="col-wrap">
-                <a href="/wap_project/remove" class="remove" data-item="1"><i class="material-icons">close</i></a>
+                <form th:action="@{'cart/remove'}" method="post">
+                    <input type="hidden" th:value="${item.id}" name="itemId"/>
+                    <a class="remove" onclick='this.parentNode.submit(); return false;'>
+                        <i class="material-icons">close</i>
+                    </a>
+                </form>
             </div>
         </div>
     </div>
-
-
-    <div class="cart-item row mb20" id="item-2">
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <a href="/wap_project/product?productId=2" class="thumb" target="_blank">
-                <img src="uploads/pro2.png">
-            </a>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <a href="/wap_project/product?productId=2" class="title">Solo Headset</a>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <div class="price">$235.0</div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <div class="quantity">2</div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <div class="price total">$470.0</div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="col-wrap">
-                <a href="/wap_project/remove" class="remove" data-item="2"><i class="material-icons">close</i></a>
-            </div>
-        </div>
-    </div>
-
     <div class="buttons row">
         <div class="col-md-5 col-xs-12">
-            <a href="/wap_project/" class="btn-core btn-blue">Continue shopping</a>
+            <a  th:href="@{'/product'}" class="btn-core btn-blue">Continue shopping</a>
         </div>
         <div class="col-md-7 col-xs-12 text-right">
-            <span class="grandTotal">Grand total: $<span id="grandTotal">995.0</span></span>
-            <a href="/wap_project/checkout" class="btn-core btn-blue">Proceed To Checkout</a>
+            <span class="grandTotal">Grand total: $<span id="grandTotal" th:text="${grandTotal}">0.0</span></span>
+            <a th:href="@{'/order/checkout'}" class="btn-core btn-blue">Proceed To Checkout</a>
         </div>
     </div>
 </section>
