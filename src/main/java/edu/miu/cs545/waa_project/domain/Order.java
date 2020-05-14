@@ -24,16 +24,14 @@ public class Order {
     @ManyToOne
     private Seller seller;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address shippingAddress;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address billingAddress;
 
-//
-//    @OneToOne
-//    private PaymentInfo paymentInfo;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private Payment payment;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -117,5 +115,29 @@ public class Order {
     public void setSeller(Seller seller) {
         this.seller = seller;
         this.buyer.addOrder(this);
+    }
+
+    public Address getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

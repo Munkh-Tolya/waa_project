@@ -86,6 +86,16 @@ public class WaaProjectApplication implements CommandLineRunner {
         /* ORDER START */
         Order o1 = new Order(new Date(), Arrays.asList(i1,i2), buyer, seller);
         Order o2 = new Order(new Date(), Arrays.asList(i4,i5), buyer, seller);
+        Address address = new Address("1000N 4th str","Fairfield","IA","United states","52557");
+        Payment payment = new Payment("1232123412341234", "JOHN DOE",4,2024);
+        Address address1 = new Address("1000N 4th str","Chicago","IL","United states","52557");
+        Payment payment1 = new Payment("4321432143214321", "STEPHEN CURRY",3,2024);
+        o1.setShippingAddress(address);
+        o1.setBillingAddress(address);
+        o1.setPayment(payment);
+        o2.setShippingAddress(address1);
+        o2.setBillingAddress(address1);
+        o2.setPayment(payment1);
         orderRepository.save(o1);
         orderRepository.save(o2);
 

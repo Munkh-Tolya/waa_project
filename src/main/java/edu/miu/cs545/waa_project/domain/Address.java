@@ -19,6 +19,22 @@ public class Address {
 
     public Address(){}
 
+    public Address(String street, String city, String state, String country, String postalCode) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.postalCode = postalCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getStreet() {
         return street;
     }
