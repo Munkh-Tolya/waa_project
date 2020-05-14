@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="container" layout:fragment="main-content">
+    <!-- MAIN START-->
+    <div class="container">
+        <div class="card" th:each="order : ${orders}">
+            <div class="card-header">
+                <p class="h5">Order Details</p>
+                <div class="row justify-content-md-center">
+                    <div class="col-4">
+                        <strong>Status: </strong><span th:text="${order.status}"></span>
+                    </div>
+                    <div class="col-4">
+                        <strong>Amount: </strong><span th:text="${order.sum}"></span>
+                    </div>
+                    <div class="col-4">
+                        <strong>Updated Date: </strong><span th:text="${order.updateTime}"></span>
+                    </div>
+                </div>
+            </div>
+            <table id="oderInfo" class="table table-bordered borderless table-hover mb-1">
+                <thead>
+                <tr>
+                    <th class="text-muted">Product</th>
+                    <th class="text-muted">Quantity</th>
+                    <th class="text-muted">Amount</th>
+                </tr>
+                </thead>
+                <tr th:each="item : ${order.items}">
+                    <td class="align-middle" th:text="${item.product.name}"></td>
+                    <td class="align-middle" th:text="${item.quantity}"></td>
+                    <td class="align-middle" th:text="${item.price}"></td>
+                </tr>
+            </table>
+            <div class="row justify-content-md-end m-2">
+                <form th:action="@{/seller/orders/{id}(id=${order.id})}" th:object="${tempOrder}" method="post">
+                    <div class="form-group">
+                        <input type="text" id="id" name="id" class="form-control" th:field="*{id}" disabled th:type="hidden">
+                        <label>Category</label>
+                        <select th:field="*{status}" class="form-control" name="status" id="status">
+                            <option value="0" selected disabled>Select status</option>
+                            <option th:each="status : ${orderStatus}" th:value="${status}" th:text="${status}"></option>
+                        </select>
+                        <button id="btn" type="submit" class="btn btn-outline-primary btn-sm">Update Status</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- MAIN END-->
+</div>
+</body>
+</html>

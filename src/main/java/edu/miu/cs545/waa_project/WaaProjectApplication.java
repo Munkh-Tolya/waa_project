@@ -75,7 +75,9 @@ public class WaaProjectApplication implements CommandLineRunner {
         Item i1 = new Item(p1,4);
         Item i2 = new Item(p2,3);
         Item i3= new Item(p3,5);
-        itemRepository.saveAll(Arrays.asList(i1,i2,i3));
+        Item i4 = new Item(p5,3);
+        Item i5= new Item(p6,5);
+        itemRepository.saveAll(Arrays.asList(i1,i2,i3,i4,i5));
         buyer.addCardItem(i1);
         buyer.addCardItem(i2);
         buyer.addCardItem(i3);
@@ -83,14 +85,14 @@ public class WaaProjectApplication implements CommandLineRunner {
 
         /* ORDER START */
         Order o1 = new Order(new Date(), Arrays.asList(i1,i2));
+        Order o2 = new Order(new Date(), Arrays.asList(i4,i5));
         orderRepository.save(o1);
-        buyer.addOrder(o1);
-        seller.addOrder(o1);
-
-        Order o2 = new Order(new Date(), Arrays.asList(i3));
         orderRepository.save(o2);
+        buyer.addOrder(o1);
         buyer.addOrder(o2);
-        seller1.addOrder(o2);
+        seller.addOrder(o1);
+        seller.addOrder(o2);
+
         /* ORDER END */
 
         /* USER FOLLOWING START */
