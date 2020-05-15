@@ -63,12 +63,40 @@ public class WaaProjectApplication implements CommandLineRunner {
 
         Product p5 = new Product("Tablet Red 8500U 2TB",c2Desc,100,"uploads/pro4.png",10,c2,seller);
         Product p6 = new Product("Laptop Sens 7200L",c2Desc,760,"uploads/pro8.png",10,c2,seller);
+
+        Product p7 = new Product("Tablet VX4000 8500 3TB", c2Desc,760, "uploads/pro8.png", 10,c2, seller1);
+        Product p8 = new Product("Ellite Pro Book 15'6 7500U", c2Desc,850, "uploads/pro5.png", 10,c2, seller1);
+        Product p9 = new Product("Tablet VX3000 Extra Light", c2Desc,850, "uploads/pro6.png", 10,c2, seller1);
+        Product p10 = new Product("Tablet VX4000 8500 3TB", c2Desc,940, "uploads/pro7.png", 10,c2, seller1);
+        Product p11 = new Product("Laptop XS3000 WiFi Smart", c2Desc,1200, "uploads/pro9.png", 10,c2, seller1);
+
+        Product p12 = new Product("Smartphone Tablet Spring2000", c3Desc,400, "uploads/pro10.png", 10,c3, seller1);
+        Product p13 = new Product("Extra Thin Elitte", c3Desc,700, "uploads/pro11.png", 10,c3, seller1);
+        Product p14 = new Product("Notebook Polo 4000", c3Desc,399, "uploads/pro11.png", 10,c3, seller1);
+        Product p15 = new Product("Smartphone Elitte Pro", c3Desc,699, "uploads/pro13.png", 10,c3, seller1);
+        Product p16 = new Product("Smartphone XD5000", c3Desc,799, "uploads/pro14.png", 10,c3, seller1);
+
+        Product p17 = new Product("Camera Xd Pro With Waterproof Cover", c4Desc,499, "uploads/pro15.png", 10,c4, seller1);
+        Product p18 = new Product("Camera HD200 X100", c4Desc,479, "uploads/pro16.png", 10,c4, seller1);
+        Product p19 = new Product("Smart Camera Extra Mini2000", c4Desc,799, "uploads/pro17.png", 10,c4, seller1);
+        Product p20 = new Product("ONTEC Camera W5000", c4Desc,400, "uploads/pro18.png", 10,c4, seller1);
+        Product p21 = new Product("Classic Camera E5000", c4Desc,400, "uploads/pro19.png", 10,c4, seller1);
+
+        Product p22 = new Product("TV Premium 2000", c5Desc,799, "uploads/pro20.png", 10,c5, seller1);
+        Product p23 = new Product("Camera HD200 X100", c5Desc,799, "uploads/pro21.png", 10,c5, seller1);
+        Product p24 = new Product("Smart Camera Extra Mini2000", c5Desc,900, "uploads/pro22.png", 10,c5, seller1);
+        Product p25 = new Product("ONTEC Camera W5000", c5Desc,399, "uploads/pro23.png", 10,c5, seller1);
+
+        Product p26 = new Product("Smart Watch", c6Desc,366, "uploads/pro24.png", 10,c6, seller1);
+        Product p27 = new Product("Smart Watch Zoop", c6Desc,100, "uploads/pro25.png", 10,c6, seller1);
+        Product p28 = new Product("Hybrid Smartwatch Waterproof", c6Desc,100, "uploads/pro26.png", 10,c6, seller1);
+
         /* PRODUCT END */
 
         /* PRODUCT REVIEW START */
         p1.addReview(new ProductReview(5,"This product is very good!",buyer,true));
         p2.addReview(new ProductReview(4,"This product is very good!",buyer,true));
-        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6));
+        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28));
         /* PRODUCT REVIEW END */
 
         /* ITEM START */
