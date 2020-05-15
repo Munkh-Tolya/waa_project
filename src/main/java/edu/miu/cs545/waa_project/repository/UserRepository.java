@@ -22,4 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Find orders by Seller
     @Query(value = "SELECT s.orders FROM Seller s WHERE s = :seller")
     List<Order> getOrdersBySeller(Seller seller);
+
+    @Query(value = "SELECT distinct o FROM Buyer b JOIN b.orders o WHERE b = :buyer ORDER BY o.updateTime DESC ")
+    List<Order> getOrdersByBuyer(Buyer buyer);
 }

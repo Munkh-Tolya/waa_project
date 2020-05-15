@@ -23,8 +23,14 @@ function addProduct(event){
 		showSuccess(response.message);
 	})
 	.fail(function(xhr, textStatus, errorThrown){
-		let errorObj = JSON.parse(xhr.responseText);
-		showError(errorObj.message);
+		try{
+			let errorObj = JSON.parse(xhr.responseText);
+			if(errorObj.message)
+				showError(errorObj.message);
+			else showError("Unknown error happened!");
+		}catch(e){
+			showError("Unknown error happened!");
+		}
 	})
 }
 
@@ -50,8 +56,14 @@ function addMultipleProduct(event){
 		$('#inputQty').val(1);
 	})
 	.fail(function(xhr, textStatus, errorThrown){
-		let errorObj = JSON.parse(xhr.responseText);
-		showError(errorObj.message);
+		try{
+			let errorObj = JSON.parse(xhr.responseText);
+			if(errorObj.message)
+				showError(errorObj.message);
+			else showError("Unknown error happened!");
+		}catch(e){
+			showError("Unknown error happened!");
+		}
 	})
 }
 

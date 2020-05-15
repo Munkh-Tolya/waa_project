@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order list</title>
+    <link rel='stylesheet' type='text/css' media='screen' th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="container" layout:fragment="main-content">
+    <!-- MAIN START-->
+    <div class="container">
+        <p class="h5">Order Details</p>
+        <div class="card mb-3" th:each="order : ${orders}">
+            <div class="card-header bg-info text-white">
+                <div class="row justify-content-md-center">
+                    <div class="col-3">
+                        <strong>Seller: </strong>
+<!--                        <a><span th:text="${order.seller.firstName}"></span></a>-->
+                        <a th:text="${order.seller.firstName}" th:href="@{/buyer/seller/{id}(id=${order.seller.id})}" style="color:white;"></a>
+                    </div>
+                    <div class="col-3">
+                        <strong>Amount: </strong><span th:text="${order.sum}"></span>
+                    </div>
+                    <div class="col-3">
+                        <strong>Status: </strong><span th:text="${order.status}"></span>
+                    </div>
+                    <div class="col-3">
+                        <strong>Updated Date: </strong><span
+                            th:text="${#dates.format(order.updateTime, 'dd-MMM-yyyy HH:mm')}"></span>
+                    </div>
+                </div>
+            </div>
+            <table id="oderInfo" class="table table-bordered borderless table-hover mb-1">
+                <thead>
+                <tr>
+                    <th class="bg-light">Product</th>
+                    <th class="bg-light">Quantity</th>
+                    <th class="bg-light">Amount</th>
+                </tr>
+                </thead>
+                <tr th:each="item : ${order.items}">
+                    <td class="align-middle" th:text="${item.product.name}"></td>
+                    <td class="align-middle" th:text="${item.quantity}"></td>
+                    <td class="align-middle" th:text="${item.price}"></td>
+                </tr>
+            </table>
+
+
+                <div class="row m-1">
+                    <div class="col-sm-6">
+                        <strong>Shipping Address: </strong>
+                        <span th:text="${order.shippingAddress.street} + ', '+ ${order.shippingAddress.city} + ', ' + ${order.shippingAddress.state} + ', ' + ${order.shippingAddress.country} + ', ' + ${order.shippingAddress.postalCode}"></span>
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-2">
+                        <form th:action="@{/buyer/order/cancel}" method="post" th:if="${order.status == order.status.New}">
+                        <button id="btn" type="submit" class="btn btn-outline-danger btn-sm float-right">Cancel order</button>
+                            <input th:type="hidden" disabled th:name="orderId" th:value="${order.id}">
+                        </form>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <!-- MAIN END-->
+</div>
+</body>
+</html>

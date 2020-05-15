@@ -18,6 +18,7 @@ public interface UserService {
     public Buyer getAuthenticatedBuyer();
     public User getAuthenticatedUser();
     List<Order> getOrdersBySeller(Seller seller);
+    List<Order> getOrdersByBuyer();
     public List<Buyer> getFollewersNumber(Long sellerId);
     Boolean buyerHasCoupon();
 }

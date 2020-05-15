@@ -36,8 +36,7 @@ public class CartServiceImpl implements CartService{
     @Override
     public ResponseDTO addItem(Long productId, int quantity) {
         ResponseDTO response = new ResponseDTO();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Buyer buyer = (Buyer)userService.findByEmail("buyer@miu.edu");
+        Buyer buyer = userService.getAuthenticatedBuyer();
         Product product = productService.find(productId);
         if(product == null || product.getQuantity() < quantity){
             throw new ResponseStatusException(
@@ -48,7 +47,6 @@ public class CartServiceImpl implements CartService{
             if(item == null) {
                 buyer.addCardItem(new Item(product,quantity));
             }else {
-                System.out.println("by this way");
                 item.setQuantity(item.getQuantity() + quantity);
                 item.setPrice(item.getPrice() + quantity * product.getPrice());
             }

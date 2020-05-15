@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 
@@ -71,6 +72,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Order> getOrdersBySeller(Seller seller) {
         return userRepository.getOrdersBySeller(seller);
+    }
+
+    @Override
+    public List<Order> getOrdersByBuyer() {
+        Buyer buyer = this.getAuthenticatedBuyer();
+        if(buyer!=null){
+            return userRepository.getOrdersByBuyer(buyer);
+        }else{
+            throw new NullPointerException("Buyer not found!");
+        }
     }
 
     @Override

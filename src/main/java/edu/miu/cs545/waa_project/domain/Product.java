@@ -26,7 +26,7 @@ public class Product {
 
     private String imagePath;
 
-    @Min(value = 1, message = "{Min.Product.quantity.validation}")
+    @Min(value = 0, message = "{Min.Product.quantity.validation}")
     private int quantity;
     private boolean enabled;
 
