@@ -20,14 +20,20 @@
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/product}">Product</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/seller/product}">Seller product</a>
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_BUYER')">
+                    <a class="nav-link" th:href="@{/buyer/order}">Orders</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/admin/products}">Admin product</a>
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_SELLER')">
+                    <a class="nav-link" th:href="@{/seller/product}">My products</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/admin/reviews}">Admin review</a>
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_SELLER')">
+                    <a class="nav-link" th:href="@{/seller/orders}">My orders</a>
+                </li>
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/products}">Approve products </a>
+                </li>
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin/reviews}">Approve reviews</a>
                 </li>
             </ul>
             <div sec:authorize="hasRole('ROLE_BUYER')">

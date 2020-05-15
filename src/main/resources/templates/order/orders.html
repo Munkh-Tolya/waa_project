@@ -13,12 +13,11 @@
         <div th:if="${message!=null}"  class="alert alert-success" role="alert">
             <span th:text="${message}"></span>
         </div>
-        <div class="card mb-3" th:each="order : ${orders}">
+        <div class="card mb-3" th:each="order : ${orders}" th:classappend="${'printDiv' + order.id}">
             <div class="card-header bg-info text-white">
                 <div class="row justify-content-md-center">
                     <div class="col-3">
                         <strong>Seller: </strong>
-<!--                        <a><span th:text="${order.seller.firstName}"></span></a>-->
                         <a th:text="${order.seller.firstName}" th:href="@{/buyer/seller/{id}(id=${order.seller.id})}" style="color:white;"></a>
                     </div>
                     <div class="col-3">
@@ -47,21 +46,19 @@
                     <td class="align-middle" th:text="${item.price}"></td>
                 </tr>
             </table>
-
-
                 <div class="row m-1">
                     <div class="col-sm-6">
                         <strong>Shipping Address: </strong>
                         <span th:text="${order.shippingAddress.street} + ', '+ ${order.shippingAddress.city} + ', ' + ${order.shippingAddress.state} + ', ' + ${order.shippingAddress.country} + ', ' + ${order.shippingAddress.postalCode}"></span>
                     </div>
                     <div class="col-sm-4">
-
                     </div>
                     <div class="col-sm-2">
                         <form th:action="@{/buyer/order/cancel}" method="post" th:if="${order.status == order.status.New}">
                             <input th:type="hidden" th:name="orderId" th:value="${order.id}">
-                            <button id="btn" type="submit" class="btn btn-outline-danger btn-sm float-right">Cancel order</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm float-right ml-1">Cancel order</button>
                         </form>
+                        <button class="btn btn-outline-primary btn-sm float-right btnPrint">Print</button>
                     </div>
                 </div>
 

@@ -24,15 +24,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select email, password, 'true' as enabled from user where email=?")
-                .authoritiesByUsernameQuery("select email, 'ROLE_'||UPPER(user_type) from user where email=?");
+                .usersByUsernameQuery("SELECT email, password, 'true' as enabled FROM user WHERE email=?")
+                .authoritiesByUsernameQuery("SELECT email, 'ROLE_' || UPPER(user_type) FROM user WHERE email=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/admin").hasAuthority("ADMIN")
-//                .antMatchers("/user").hasAuthority("BUYER")
+                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/buyer/**").hasAuthority("ROLE_BUYER")
+                .antMatchers("/seller/**").hasAuthority("ROLE_SELLER")
                 .antMatchers("/**", "/h2-console/**").permitAll()
                 .and()
                 .formLogin()

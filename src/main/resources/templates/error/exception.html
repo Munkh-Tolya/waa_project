@@ -17,9 +17,9 @@
                         <!--/*@thymesVar id="msg" type=""*/-->
                         <p class="h2" th:text="${msg}">Sorry, you do not have permission to view this page.</p>
                         <!--/*@thymesVar id="url" type=""*/-->
-                        <p class="h4" th:text="${url}">Sorry, you do not have permission to view this page.</p>
+                        <p th:text="${'Url: ' + url}">Sorry, you do not have permission to view this page.</p>
                         <!--/*@thymesVar id="exception" type=""*/-->
-                        <p class="h4" th:text="${exception}">Sorry, you do not have permission to view this page.</p>
+                        <p th:text="${'Exception: ' + exception}">Sorry, you do not have permission to view this page.</p>
                     </div>
                     <div class="error-actions">
                         <a type="button" class="btn btn-primary" href="/" th:href="@{/}">Go Home</a>
