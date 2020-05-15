@@ -17,21 +17,21 @@ public class User {
     private Long id;
 
     @Column(name="FIRST_NAME")
-    @NotEmpty(message = "*Please provide your first name")
+    @NotEmpty(message = "{User.FirstName.validation}")
     private String firstName;
 
 
     @Column(name="LAST_NAME")
-    @NotEmpty(message = "*Please provide your last name")
+    @NotEmpty(message = "{User.LastName.validation}")
     private String lastName;
 
     @Column(unique = true)
-    @Email(message = "*Please provide a valid Email")
-    @NotBlank(message = "*Please provide a valid Email")
+    @Email(message = "{User.Email.validation}")
+    @NotBlank(message = "{User.Email.validation}")
     private String email;
 
-    @NotBlank(message = "*Please provide your password")
-    @Size(min = 4, message = "*Password length must be at least 4")
+    @NotBlank(message = "{User.Pass.validation}")
+    @Size(min = 4, message = "{User.PassSize.validation}")
     private String password;
 
     public User(){}
