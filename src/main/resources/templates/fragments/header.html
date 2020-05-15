@@ -37,7 +37,8 @@
                 </a>
             </div>
             <div>
-                <div class="dropdown">
+                <a sec:authorize="isAnonymous()" th:href="@{/account/login}" class="btn btn-light my-2 my-lg-0">Login</a>
+                <div sec:authorize="isAuthenticated()"  class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user-circle"></i> <span th:text="${userName}"></span>
                     </a>
