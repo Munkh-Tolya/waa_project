@@ -19,54 +19,51 @@
 <body>
 <div class="container" layout:fragment="main-content">
     <!-- BUYER HOME START-->
+         <section>
+             <div class="row justify-content-md-center">
+                 <div class="col-12">
+                 <h3 align="center">Products to be approved</h3>
+                    <table class="class=table table-bordered table-striped" id="myTable" width="100%" cellspacing="0" data-toggle="table" data-maintain-meta-data="true">
 
-        <h3 align="center">Products to be approved</h3>
+                        <thead class="thead-dark">
+                        <tr>
+                            <th data-sortable="true">Product Name</th>
+                            <th data-sortable="true">Seller's Full Name</th>
+                            <th data-sortable="true">Seller's email </th>
+                            <th data-sortable="true">Price</th>
+                            <th data-sortable="true">Quantity</th>
+                            <th data-sortable="true">Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product: ${products}" >
+                            <td th:text="${product.name}"></td>
+                            <td th:text="${product.seller.firstName}+' '+${product.seller.lastName}"></td>
+                            <td th:text="${product.seller.email}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.quantity}"></td>
+                            <td>
+                                <span th:if="${product.enabled}">Approved</span>
+                                <span th:unless="${product.enabled}">Pending</span>
+                            </td>
+                            <td>
+                                <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/approve}" method="post">
+                                    <input type="submit" value="Approve" th:if="${product.isEnabled() ==false}" class="btn btn-sm btn-primary btn-lg"/>
+                                </form>
 
-    <div class="card-body">
-        <div class="row col-md-12 table-responsive">
-            <table class="class=table table-bordered table-striped" id="myTable" width="100%" cellspacing="0"  data-toolbar="#toolbar" data-toggle="table" data-maintain-meta-data="true">
-
-                <thead class="thead-dark">
-                <tr>
-                    <th data-sortable="true">Product Name</th>
-                    <th data-sortable="true">Seller's Full Name</th>
-                    <th data-sortable="true">Seller's email </th>
-                    <th data-sortable="true">Price</th>
-                    <th data-sortable="true">Quantity</th>
-                    <th data-sortable="true">Status</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="product: ${products}" >
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.seller.firstName}+' '+${product.seller.lastName}"></td>
-                    <td th:text="${product.seller.email}"></td>
-                    <td th:text="${product.price}"></td>
-                    <td th:text="${product.quantity}"></td>
-                    <td>
-                        <span th:if="${product.enabled}">Approved</span>
-                        <span th:unless="${product.enabled}">Pending</span>
-                    </td>
-                    <td>
-                        <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/approve}" method="post">
-                            <input type="submit" value="Approve" th:if="${product.isEnabled() ==false}" class="btn btn-sm btn-primary btn-lg"/>
-                        </form>
-
-                        <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/reject}" method="post">
-                            <input type="submit" value="Reject" th:if="${product.isEnabled()== true}" class="btn btn-danger btn-sm btn-lg"/>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-
+                                <form action="#" th:action="@{/admin/products/} + ${product.id} + @{/reject}" method="post">
+                                    <input type="submit" value="Reject" th:if="${product.isEnabled()== true}" class="btn btn-danger btn-sm btn-lg"/>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                 </div>
+             </div>
+         </section>
     <!-- BUYER HOME END-->
 </div>
-
 </body>
 
 </html>
