@@ -19,8 +19,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Find orders by Seller
     @Query(value = "SELECT s.orders FROM Seller s WHERE s = :seller")
     List<Order> getOrdersBySeller(Seller seller);
-
-    @Query(value ="Select b.cardItems From Buyer b where b = :seller")
-    List<Item> test(Seller seller);
-
 }

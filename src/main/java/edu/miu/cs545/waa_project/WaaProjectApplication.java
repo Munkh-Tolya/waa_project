@@ -77,19 +77,21 @@ public class WaaProjectApplication implements CommandLineRunner {
         Item i3= new Item(p3,5);
         Item i4 = new Item(p5,3);
         Item i5= new Item(p6,5);
-        itemRepository.saveAll(Arrays.asList(i1,i2,i3,i4,i5));
+        Item i6 = new Item(p1,3);
+        Item i7= new Item(p2,5);
+        itemRepository.saveAll(Arrays.asList(i1,i2,i3,i4,i5,i6,i7));
         buyer.addCardItem(i1);
         buyer.addCardItem(i2);
         buyer.addCardItem(i3);
         /* ITEM END */
 
         /* ORDER START */
-        Order o1 = new Order(new Date(), Arrays.asList(i1,i2), buyer, seller);
+        Order o1 = new Order(new Date(), Arrays.asList(i6,i7), buyer, seller);
         Order o2 = new Order(new Date(), Arrays.asList(i4,i5), buyer, seller);
         Address address = new Address("1000N 4th str","Fairfield","IA","United states","52557");
-        Payment payment = new Payment("1232123412341234", "JOHN DOE",4,2024);
+        Payment payment = new Payment("5257138872690125", "JOHN DOE",4,2024);
         Address address1 = new Address("1000N 4th str","Chicago","IL","United states","52557");
-        Payment payment1 = new Payment("4321432143214321", "STEPHEN CURRY",3,2024);
+        Payment payment1 = new Payment("5257138872690125", "STEPHEN CURRY",3,2024);
         o1.setShippingAddress(address);
         o1.setBillingAddress(address);
         o1.setPayment(payment);

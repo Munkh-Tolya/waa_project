@@ -73,4 +73,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.getOrdersBySeller(seller);
     }
 
+    @Override
+    public Boolean buyerHasCoupon() {
+        Buyer buyer = this.getAuthenticatedBuyer();
+        if(buyer.getCoupon() > 0) return true;
+        else return false;
+    }
+
 }

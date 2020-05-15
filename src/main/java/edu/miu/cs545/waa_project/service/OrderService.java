@@ -8,4 +8,6 @@ public interface OrderService {
 
     void updateOrderStatusById(Long Id, OrderStatus status);
 
+    Order saveOrder(Order order, String sellerId, String coupon);
+
 }

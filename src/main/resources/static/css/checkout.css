@@ -1,0 +1,66 @@
+#checkout{
+    margin: 50px 0;
+}
+#checkout .thead{
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e5e5e5;
+}
+#checkout .thead .big{
+    font-size: 20px;
+}
+#checkout .thead .normal{
+    padding-top: 5px;
+}
+#checkout .order-details{
+    padding: 30px;
+    font-size: 1rem;
+}
+#checkout .price{
+    font-size: 20px;
+}
+#checkout .total{
+    color: #f33927;
+}
+#checkout .subtotal{
+    padding-top: 25px;
+    margin-top: 20px;
+    border-top: 1px solid #e5e5e5;
+}
+
+#checkout h2{
+    font-size: 36px;
+    text-transform: capitalize;
+    line-height: 1;
+    letter-spacing: .02em;
+    font-weight: 700;
+    margin: 0 0 20px;
+}
+.checkout-success label{
+    font-weight: 500;
+}
+#msg.success{
+    color: green;
+}
+
+.orders-list #cart{
+    margin-top: 15px;
+}
+.orders-list h1{
+    font-size: 33px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.orders-list .grandTotal{
+    font-size: 20px;
+}
+
+.form-group .required:after {
+    content:" *";
+    color:red;
+}
+.border-gray{
+    padding:1rem;
+}

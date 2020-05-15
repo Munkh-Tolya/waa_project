@@ -69,10 +69,12 @@
                     <div class="col-md-7 col-xs-12 text-right">
                         <!--                    <span class="grandTotal">Grand total: $<span id="grandTotal" th:text="${grandTotal}">0.0</span></span>-->
                         <!--                    <a th:href="@{'/order/checkout'}" class="btn-core btn-blue">Proceed To Checkout</a>-->
-                        <form th:action="@{'/order/checkout'}" method="GET">
+                        <form th:action="@{'/buyer/order/checkout'}" method="GET">
                             <span class="grandTotal">Grand total: $<span id="grandTotal" th:text="${cartDTO.total}">0.0</span></span>
-                            <input type="checkbox" class="couponcheck" value="1" name="coupon">
-                            <label class="coupon"> Use coupon </label>
+                            <span th:if="${hasCoupon}">
+                                    <input type="checkbox" class="couponcheck" value="1" name="coupon">
+                                    <label class="coupon"> Use coupon </label>
+                            </span>
                             <input type="hidden"  name="sellerId" th:value="${cartDTO.sellerId}">
                             <button type="submit" class="btn-core btn-blue">Proceed To Checkout</button>
                         </form>

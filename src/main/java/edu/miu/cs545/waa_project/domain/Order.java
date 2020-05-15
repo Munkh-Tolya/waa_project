@@ -1,6 +1,9 @@
 package edu.miu.cs545.waa_project.domain;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +27,17 @@ public class Order {
     @ManyToOne
     private Seller seller;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
+    @Valid
     private Address shippingAddress;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @Valid
     private Address billingAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @Valid
     private Payment payment;
 
     @Enumerated(EnumType.STRING)
@@ -114,7 +121,7 @@ public class Order {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
-        this.buyer.addOrder(this);
+        this.seller.addOrder(this);
     }
 
     public Address getShippingAddress() {

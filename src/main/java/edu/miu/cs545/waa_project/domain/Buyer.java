@@ -21,6 +21,8 @@ public class Buyer extends User{
     @ManyToMany
     private List<Seller> following = new ArrayList<Seller>();
 
+    private int coupon = 1;
+
     public Buyer(){
     }
 
@@ -71,6 +73,14 @@ public class Buyer extends User{
 
     public void setFollowing(List<Seller> following) {
         this.following = following;
+    }
+
+    public int getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(int coupon) {
+        this.coupon = coupon;
     }
 }
 

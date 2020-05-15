@@ -1,17 +1,53 @@
 package edu.miu.cs545.waa_project.controller;
 
+import edu.miu.cs545.waa_project.domain.Item;
+import edu.miu.cs545.waa_project.domain.Order;
+import edu.miu.cs545.waa_project.service.CartService;
+import edu.miu.cs545.waa_project.service.OrderService;
+import edu.miu.cs545.waa_project.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/buyer/order")
 @SessionAttributes({ "userName" })
 public class OrderController {
+    @Autowired
+    CartService cartService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    OrderService orderService;
 
     @GetMapping("/checkout")
-    public String checkOut(){
+    public String checkOut(@ModelAttribute("order") Order order,Model model,
+                           @RequestParam Long sellerId ,@RequestParam(required=false) Integer coupon){
+        model = cartService.getCheckOutSummary(model,sellerId,coupon);
         return "order/checkout";
     }
+
+    @PostMapping("/save")
+    public String saveOrder(@Valid @ModelAttribute("order") Order order, BindingResult bindingResult,
+                            Model model, @RequestParam(required = false) String coupon, @RequestParam String sellerId,
+                            RedirectAttributes redAttr){
+        if (bindingResult.hasErrors()) {
+            model = cartService.getCheckOutSummary(model,Long.parseLong(sellerId),Integer.parseInt(coupon));
+            return "order/checkout";
+        }
+        order = orderService.saveOrder(order,sellerId,coupon);
+        if(order != null){
+            redAttr.addFlashAttribute("msg","Thank you! Order and coupon has been added to your account.");
+            return "redirect:/buyers/orders";
+        }else{
+             return "order/checkout";
+        }
+    }
+
 }

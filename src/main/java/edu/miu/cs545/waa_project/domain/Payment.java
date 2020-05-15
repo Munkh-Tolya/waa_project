@@ -1,6 +1,11 @@
 package edu.miu.cs545.waa_project.domain;
 
+import org.hibernate.validator.constraints.CreditCardNumber;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -9,12 +14,17 @@ public class Payment {
     @GeneratedValue
     private Long id;
 
+    @CreditCardNumber
+    @Size(min=16,max=16, message = "Card should have 16 numbers!")
     private String cartNumber;
 
+    @NotEmpty
     private String nameOnCard;
 
+    @NotNull
     private int expriyMonth;
 
+    @NotNull
     private int expriryYear;
 
     public Payment(){}
