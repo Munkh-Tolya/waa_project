@@ -115,17 +115,8 @@ public class ProductController {
     public ModelAndView handleError(HttpServletRequest request, InvalidImageUploadException exception) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("msg", exception.getFullMessage());
-        mav.setViewName("seller/exceptionTemp");
+        mav.setViewName("error/exception");
         return mav;
-    }
-
-    /***Seller product information*/
-    @GetMapping("/seller/product")
-    public String getProductList(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Seller seller = (Seller) userService.findByEmail(auth.getName());
-        model.addAttribute("products", productService.getProductsBySeller(seller));
-        return "/seller/productList";
     }
 
     /***Product delete by Seller*/
@@ -147,17 +138,29 @@ public class ProductController {
         mav.addObject("msg", exception.getFullMessage());
         mav.addObject("exception", exception);
         mav.addObject("url", request.getRequestURL());
-        mav.setViewName("seller/exceptionTemp");
+        mav.setViewName("error/exception");
         return mav;
     }
 
-    /***Product edit by Seller*/
-    @GetMapping(value = {"/seller/product/{id}"})
-    public String editRequest(@PathVariable(value = "id", required = false) Long id, Model model) {
+    /*** Product details by seller */
+    @GetMapping(value = {"/seller/product"})
+    public String productDetails(@RequestParam(value = "id", required = false) Long id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Seller seller = (Seller) userService.findByEmail(auth.getName());
         if (id != null) {
             model.addAttribute("product", productService.find(id));
+            return "seller/productDetails";
         }
 
+        model.addAttribute("products", productService.getProductsBySeller(seller));
+        return "/seller/productList";
+    }
+
+
+    /***Product edit by Seller*/
+    @GetMapping(value = {"/seller/product/{id}"})
+    public String editRequest(@PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("product", productService.find(id));
         return "seller/editProduct";
     }
 

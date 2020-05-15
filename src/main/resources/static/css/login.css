@@ -10,3 +10,15 @@
 .borderless td, .borderless th {
     border: #494f54;
 }
+
+.error-template {
+    position: relative;
+    top: 20vh;
+    padding: 20px 15px;
+    text-align: center;
+}
+.error-actions {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.error-actions .btn { margin-right:10px; }
