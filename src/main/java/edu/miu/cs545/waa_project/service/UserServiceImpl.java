@@ -35,8 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Seller addFollower(Long sellerId, String action) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Buyer buyer = (Buyer)this.findByEmail("buyer@miu.edu");
+        Buyer buyer = this.getAuthenticatedBuyer();
         Seller seller = (Seller) this.find(sellerId);
         if(action.equals("follow")){
             buyer.addFollowing(seller);
