@@ -140,9 +140,9 @@ public class WaaProjectApplication implements CommandLineRunner {
         Order o3 = new Order(new Date(), Arrays.asList(i20,i21), buyer1, seller1);
         Order o4 = new Order(new Date(), Arrays.asList(i22,i23), buyer1, seller1);
         Address address3 = new Address("1000N 4th str","Fairfield","IA","United states","52557");
-        Payment payment3 = new Payment("5257138872690127", "JOHN DOE",4,2024);
+        Payment payment3 = new Payment("1111222233334444", "JOHN DOE",4,2024);
         Address address4 = new Address("1000N 4th str","Chicago","IL","United states","52557");
-        Payment payment4 = new Payment("5257138872690127", "STEPHEN CURRY",3,2024);
+        Payment payment4 = new Payment("1111222233334444", "STEPHEN CURRY",3,2024);
         o3.setShippingAddress(address3);
         o3.setBillingAddress(address3);
         o3.setPayment(payment3);
@@ -150,7 +150,7 @@ public class WaaProjectApplication implements CommandLineRunner {
         o4.setBillingAddress(address4);
         o4.setPayment(payment4);
 
-        orderRepository.saveAll(Arrays.asList(o1,o2));
+        orderRepository.saveAll(Arrays.asList(o1,o2,o3,o4));
         /* ORDER END */
 
         userRepository.saveAll(Arrays.asList(admin,seller,seller1,buyer,buyer1));
