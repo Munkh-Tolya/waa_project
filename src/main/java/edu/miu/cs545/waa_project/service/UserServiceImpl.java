@@ -74,6 +74,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Buyer> getFollewersNumber(Long sellerId) {
+        return userRepository.getFollowersNumber(sellerId);
+    }
+
+    @Override
     public Boolean buyerHasCoupon() {
         Buyer buyer = this.getAuthenticatedBuyer();
         if(buyer.getCoupon() > 0) return true;

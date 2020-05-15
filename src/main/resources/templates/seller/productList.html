@@ -44,7 +44,10 @@
                             <td class="align-middle" th:text="${product.quantity}"></td>
                             <td class="align-middle" th:text="${product.enabled} ? 'Approved' : 'Pending'"></td>
                             <td class="align-middle">
-                                <a title="Edit" class="btn btn-sm btn-outline-primary"
+                                <a title="Info" class="btn btn-sm btn-outline-primary"
+                                   th:href="@{/seller/product(id=${product.id})}">
+                                    <i class="material-icons"> info</i></a>
+                                <a title="Edit" class="btn btn-sm btn-outline-secondary"
                                    th:href="@{/seller/product/{id}(id=${product.id})}">
                                     <i class="material-icons"> edit</i></a>
                                 <a title="Delete" class="btn btn-outline-warning btn-sm"
@@ -60,6 +63,5 @@
     </div>
     <!-- MAIN END-->
 </div>
-
 </body>
 </html>

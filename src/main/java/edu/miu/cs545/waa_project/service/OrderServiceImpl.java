@@ -26,7 +26,9 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public void updateOrderStatusById(Long Id, OrderStatus status) {
         Order order = findById(Id);
+        Date date = new Date();
         order.setStatus(status);
+        order.setUpdateTime(date);
         orderRepository.save(order);
     }
 

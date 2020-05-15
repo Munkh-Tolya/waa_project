@@ -9,27 +9,31 @@
 <div class="container" layout:fragment="main-content">
     <!-- MAIN START-->
     <div class="container">
-        <div class="card" th:each="order : ${orders}">
-            <div class="card-header">
-                <p class="h5">Order Details</p>
+        <p class="h5">Order Details</p>
+        <div class="card mb-3" th:each="order : ${orders}">
+            <div class="card-header bg-info text-white">
                 <div class="row justify-content-md-center">
-                    <div class="col-4">
-                        <strong>Status: </strong><span th:text="${order.status}"></span>
+                    <div class="col-3">
+                        <strong>Buyer: </strong><span th:text="${order.buyer.firstName}"></span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <strong>Amount: </strong><span th:text="${order.sum}"></span>
                     </div>
-                    <div class="col-4">
-                        <strong>Updated Date: </strong><span th:text="${order.updateTime}"></span>
+                    <div class="col-3">
+                        <strong>Status: </strong><span th:text="${order.status}"></span>
+                    </div>
+                    <div class="col-3">
+                        <strong>Updated Date: </strong><span
+                            th:text="${#dates.format(order.updateTime, 'dd-MMM-yyyy HH:mm')}"></span>
                     </div>
                 </div>
             </div>
             <table id="oderInfo" class="table table-bordered borderless table-hover mb-1">
                 <thead>
                 <tr>
-                    <th class="text-muted">Product</th>
-                    <th class="text-muted">Quantity</th>
-                    <th class="text-muted">Amount</th>
+                    <th class="bg-light">Product</th>
+                    <th class="bg-light">Quantity</th>
+                    <th class="bg-light">Amount</th>
                 </tr>
                 </thead>
                 <tr th:each="item : ${order.items}">
@@ -38,22 +42,27 @@
                     <td class="align-middle" th:text="${item.price}"></td>
                 </tr>
             </table>
-            <div class="row justify-content-md-end m-2">
-                <form th:action="@{/seller/orders/{id}(id=${order.id})}" th:object="${tempOrder}" method="post">
-                    <div class="form-group">
-                        <input type="text" id="id" name="id" class="form-control" th:field="*{id}" disabled th:type="hidden">
-                        <label>Category</label>
-                        <select th:field="*{status}" class="form-control" name="status" id="status">
-                            <option value="0" selected disabled>Select status</option>
-                            <option th:each="status : ${orderStatus}" th:value="${status}" th:text="${status}"></option>
+
+            <form th:action="@{/seller/orders/{id}(id=${order.id})}" th:object="${tempOrder}" method="post">
+                <div class="row justify-content-md-end m-1">
+                    <div class="col-md-auto form-group align-middle m-1 mt-1">
+                        <strong>Shipping Address: </strong>
+                        <span th:text="${order.shippingAddress.street} + ', '+ ${order.shippingAddress.city} + ', ' + ${order.shippingAddress.state} + ', ' + ${order.shippingAddress.country} + ', ' + ${order.shippingAddress.postalCode}"></span>
+                    </div>
+                    <div class="col-md-auto form-group align-middle m-1">
+                        <input type="text" id="id" name="id" th:field="*{id}" disabled th:type="hidden">
+                        <select class="form-control-sm" name="status" id="status">
+                            <option th:each="stat : ${orderStatus}" th:selected="${stat == order.status}" th:value="${stat}" th:text="${stat}"></option>
                         </select>
+                    </div>
+                    <div class="col-md-auto form-group align-middle m-1 mt-1">
                         <button id="btn" type="submit" class="btn btn-outline-primary btn-sm">Update Status</button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-<!-- MAIN END-->
+    <!-- MAIN END-->
 </div>
 </body>
 </html>

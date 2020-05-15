@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoringAntMatchers("/h2-console/**")
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/accessDenied");
+                .accessDeniedPage("/error/error-403");
 
         //Those two settings below is to enable access h2 database via browser
         //http.csrf().disable();
