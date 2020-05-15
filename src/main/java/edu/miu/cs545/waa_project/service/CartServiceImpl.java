@@ -90,7 +90,7 @@ public class CartServiceImpl implements CartService{
         return model;
     }
     @Override
-    public Model getCheckOutSummary(Model model, Long sellerId, Integer coupon) {
+    public Model getCheckOutSummary(Model model, Long sellerId, String coupon) {
         List<Item> items = this.getCartItemsBySeller(sellerId);
         double subTotal = 0.0;
         double grandTotal = 0.0;

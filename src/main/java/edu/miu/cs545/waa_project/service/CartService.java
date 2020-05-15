@@ -9,6 +9,6 @@ import java.util.List;
 public interface CartService {
     ResponseDTO addItem(Long productId, int quantity);
     Model getCartItems(Model model);
-    Model getCheckOutSummary(Model model, Long sellerId, Integer coupon);
+    Model getCheckOutSummary(Model model, Long sellerId, String coupon);
     List<Item> getCartItemsBySeller(Long sellerId);
 }

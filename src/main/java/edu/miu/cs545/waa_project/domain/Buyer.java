@@ -21,7 +21,7 @@ public class Buyer extends User{
     @ManyToMany
     private List<Seller> following = new ArrayList<Seller>();
 
-    private int coupon = 1;
+    private int coupon = 0;
 
     public Buyer(){
     }

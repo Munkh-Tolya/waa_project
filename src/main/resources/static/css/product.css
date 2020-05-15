@@ -107,7 +107,7 @@ h4 {
     font-weight: 500;
 }
 .all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .stars {
-    color: #346beb;
+    color: orange;
     margin: 2px 0 10px;
 }
 .all-products .col .product-item .mat-card:not([class*=mat-elevation-z]) .product-info-wrapper .stars mat-icon {

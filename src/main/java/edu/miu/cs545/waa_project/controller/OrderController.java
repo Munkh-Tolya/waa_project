@@ -39,7 +39,7 @@ public class OrderController {
     }
     @GetMapping("/checkout")
     public String checkOut(@ModelAttribute("order") Order order,Model model,
-                           @RequestParam Long sellerId ,@RequestParam(required=false) Integer coupon){
+                           @RequestParam Long sellerId ,@RequestParam(required=false) String coupon){
         model = cartService.getCheckOutSummary(model,sellerId,coupon);
         return "order/checkout";
     }
@@ -49,7 +49,7 @@ public class OrderController {
                             Model model, @RequestParam(required = false) String coupon, @RequestParam String sellerId,
                             RedirectAttributes redAttr){
         if (bindingResult.hasErrors()) {
-            model = cartService.getCheckOutSummary(model,Long.parseLong(sellerId),Integer.parseInt(coupon));
+            model = cartService.getCheckOutSummary(model,Long.parseLong(sellerId),coupon);
             return "order/checkout";
         }
         order = orderService.saveOrder(order,sellerId,coupon);
@@ -60,7 +60,10 @@ public class OrderController {
              return "order/checkout";
         }
     }
-
-
+    @PostMapping("/cancel")
+    public String cancelOrder(@RequestParam Long orderId,RedirectAttributes redAttr){
+        redAttr.addFlashAttribute("message",orderService.cancelOrder(orderId));
+        return "redirect:/buyer/order";
+    }
 
 }

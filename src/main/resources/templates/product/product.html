@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Product Page</title>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="product" class="container pt-4" layout:fragment="main-content">
-    <div class="row mb-4">
+    <div class="row mb-4" th:if="${product.isEnabled()}">
         <div class="col-4">
             <div class="image">
                 <img th:attr="src=@{'/' + ${product.imagePath}},title=${product.name},alt=${product.name}"/>
@@ -23,9 +23,7 @@
             <div class="horizontal-line">
                 <p class="text-justify" th:text="${product.description}"></p>
             </div>
-            <div>
-            </div>
-            <div class="form-inline mt-4">
+            <div sec:authorize="hasRole('ROLE_BUYER')" class="form-inline mt-4">
                 <div class="form-group mx-sm-3 mb-2">
                     <input type="number" class="form-control" id="inputQty" min="1" max="100" value="1">
                 </div>
@@ -51,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <a th:href="@{/product/review/{id}(id=${product.id})}" class="btn-core btn-blue mt-2">
+                <a sec:authorize="hasRole('ROLE_BUYER')" th:href="@{/product/review/{id}(id=${product.id})}" class="btn-core btn-blue mt-2">
                     <span class="fas fa-edit"></span> ADD REVIEW
                 </a>
             </div>

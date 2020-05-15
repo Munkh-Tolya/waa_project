@@ -10,6 +10,9 @@
     <!-- MAIN START-->
     <div class="container">
         <p class="h5">Order Details</p>
+        <div th:if="${message!=null}"  class="alert alert-success" role="alert">
+            <span th:text="${message}"></span>
+        </div>
         <div class="card mb-3" th:each="order : ${orders}">
             <div class="card-header bg-info text-white">
                 <div class="row justify-content-md-center">
@@ -56,8 +59,8 @@
                     </div>
                     <div class="col-sm-2">
                         <form th:action="@{/buyer/order/cancel}" method="post" th:if="${order.status == order.status.New}">
-                        <button id="btn" type="submit" class="btn btn-outline-danger btn-sm float-right">Cancel order</button>
-                            <input th:type="hidden" disabled th:name="orderId" th:value="${order.id}">
+                            <input th:type="hidden" th:name="orderId" th:value="${order.id}">
+                            <button id="btn" type="submit" class="btn btn-outline-danger btn-sm float-right">Cancel order</button>
                         </form>
                     </div>
                 </div>

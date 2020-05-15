@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Buyer getAuthenticatedBuyer() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Buyer buyer = (Buyer)this.findByEmail("buyer@miu.edu");
+        Buyer buyer = (Buyer)this.findByEmail(auth.getName());
         return buyer;
     }
 

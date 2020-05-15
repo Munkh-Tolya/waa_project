@@ -5,6 +5,7 @@ import edu.miu.cs545.waa_project.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +47,8 @@ public class OrderServiceImpl implements OrderService{
             if(coupon != null && buyer.getCoupon() > 0){
                 result = result * 0.95;
                 buyer.setCoupon(buyer.getCoupon() - 1);
+            }else{
+                buyer.setCoupon(buyer.getCoupon() + 1);
             }
             order.setSeller(seller);
             order.setBuyer(buyer);
@@ -61,4 +64,18 @@ public class OrderServiceImpl implements OrderService{
         }
         return null;
     }
+
+    @Override
+    public String cancelOrder(Long orderId) {
+        Order order = this.findById(orderId);
+        if(order !=null && order.getStatus() == OrderStatus.New){
+            order.setStatus(OrderStatus.Cancelled);
+            orderRepository.save(order);
+            return "Order has been cancelled!";
+        }else{
+            return "Order can not be cancelled!";
+        }
+    }
+
+
 }

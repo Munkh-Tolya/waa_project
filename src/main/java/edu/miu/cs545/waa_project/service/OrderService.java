@@ -10,4 +10,6 @@ public interface OrderService {
 
     Order saveOrder(Order order, String sellerId, String coupon);
 
+    String cancelOrder(Long orderId);
+
 }

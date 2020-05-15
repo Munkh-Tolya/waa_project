@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Product Page</title>
@@ -19,7 +19,7 @@
             <div class="col-md-9 col-sm-8 col-xs-12">
                 <div class="sidebar-wrapper">
                     <div  class="all-products">
-                                <div class="col"  th:each="product : ${products}">
+                                <div class="col"  th:each="product : ${products}" th:if="${product.isEnabled()}">
                                 <div  class="product-box">
                                     <div  class="product-item">
                                         <div class="mat-card">
@@ -40,8 +40,8 @@
                                                     <mat-icon class="mat-icon material-icons" role="img">star_rate</mat-icon>
                                                 </div>
                                                 <div class="price-wrap">
-                                                    <p th:text="${product.price}">0.0</p>
-                                                    <a class="addToCard" th:value="${product.id}">
+                                                    <p th:text="${'$' + product.price}">0.0</p>
+                                                    <a sec:authorize="hasRole('ROLE_BUYER')" class="addToCard" th:value="${product.id}">
                                                         <mat-icon class="mat-icon material-icons" role="img">shopping_cart</mat-icon>
                                                     </a>
                                                 </div>

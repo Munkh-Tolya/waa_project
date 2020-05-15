@@ -28,7 +28,7 @@ public class Product {
 
     @Min(value = 0, message = "{Min.Product.quantity.validation}")
     private int quantity;
-    private boolean enabled;
+    private boolean enabled = false;
 
     @Transient
     @JsonIgnore
@@ -55,7 +55,7 @@ public class Product {
         this.price = price;
         this.imagePath = imagePath;
         this.quantity = quantity;
-        this.enabled = false;
+        this.enabled = true;
         this.category = category;
         this.seller = seller;
         this.seller.addProduct(this);
