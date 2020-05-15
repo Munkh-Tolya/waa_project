@@ -30,11 +30,20 @@ public class WaaProjectApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception
     {
+        /* USER START */
         Admin admin = new Admin("admin","admin","admin@miu.edu","$2a$10$/8XXI4KpM2cp8evP7.NXjOmLLXFNHj9VtqB9wOUojWOk3fAISRvx.");
-        Seller seller = new Seller("seller","seller","seller@miu.edu","$2a$10$gKkVcQ71UXf7yC3l1A4cD.C5YAD5dYo6cUQyyS4J/Q5qokZnJ94x.");
-        Seller seller1 = new Seller("seller1","seller1","seller1@miu.edu","$2a$10$gKkVcQ71UXf7yC3l1A4cD.C5YAD5dYo6cUQyyS4J/Q5qokZnJ94x.");
-        Buyer buyer = new Buyer("buyer","buyer","buyer@miu.edu","$2a$10$rH.SaKTlzH0W4mbQ6JkZz.Ss7whuKuwBUyFIkr1OY.15SYSC0jJ2O");
-        userRepository.saveAll(Arrays.asList(admin,seller,seller1,buyer));
+
+        Seller seller = new Seller("Uugan","Bayar","uugnaa@miu.edu","$2a$10$gKkVcQ71UXf7yC3l1A4cD.C5YAD5dYo6cUQyyS4J/Q5qokZnJ94x.");
+        Seller seller1 = new Seller("Otgon","Bayar","oogii@miu.edu","$2a$10$gKkVcQ71UXf7yC3l1A4cD.C5YAD5dYo6cUQyyS4J/Q5qokZnJ94x.");
+
+        Buyer buyer = new Buyer("Od","Bayar","odko@miu.edu","$2a$10$rH.SaKTlzH0W4mbQ6JkZz.Ss7whuKuwBUyFIkr1OY.15SYSC0jJ2O");
+        Buyer buyer1 = new Buyer("Munkh","Erdene","munkh@miu.edu","$2a$10$rH.SaKTlzH0W4mbQ6JkZz.Ss7whuKuwBUyFIkr1OY.15SYSC0jJ2O");
+
+        buyer.addFollowing(seller);
+        buyer1.addFollowing(seller);
+
+        userRepository.saveAll(Arrays.asList(admin,seller,seller1,buyer,buyer1));
+        /* USER END */
 
         /* CATEGORY START */
         Category c1 = new Category("Headphones");
@@ -58,17 +67,17 @@ public class WaaProjectApplication implements CommandLineRunner {
         /* PRODUCT START */
         Product p1 = new Product("ONTEC E Headset",c1Desc,175,"uploads/pro1.png",10,c1,seller);
         Product p2 = new Product("Solo Headset",c1Desc,235,"uploads/pro2.png",10,c1,seller);
-        Product p3 = new Product("Ultra Whitte Wireless",c1Desc,350,"uploads/pro3.png",10,c1,seller1);
-        Product p4 = new Product("Wireless Mondo",c1Desc,266,"uploads/pro33.png",10,c1,seller1);
+        Product p3 = new Product("Ultra Whitte Wireless",c1Desc,350,"uploads/pro3.png",10,c1,seller);
+        Product p4 = new Product("Wireless Mondo",c1Desc,266,"uploads/pro33.png",10,c1,seller);
 
         Product p5 = new Product("Tablet Red 8500U 2TB",c2Desc,100,"uploads/pro4.png",10,c2,seller);
         Product p6 = new Product("Laptop Sens 7200L",c2Desc,760,"uploads/pro8.png",10,c2,seller);
 
-        Product p7 = new Product("Tablet VX4000 8500 3TB", c2Desc,760, "uploads/pro8.png", 10,c2, seller1);
-        Product p8 = new Product("Ellite Pro Book 15'6 7500U", c2Desc,850, "uploads/pro5.png", 10,c2, seller1);
-        Product p9 = new Product("Tablet VX3000 Extra Light", c2Desc,850, "uploads/pro6.png", 10,c2, seller1);
-        Product p10 = new Product("Tablet VX4000 8500 3TB", c2Desc,940, "uploads/pro7.png", 10,c2, seller1);
-        Product p11 = new Product("Laptop XS3000 WiFi Smart", c2Desc,1200, "uploads/pro9.png", 10,c2, seller1);
+        Product p7 = new Product("Tablet VX4000 8500 3TB", c2Desc,760, "uploads/pro8.png", 10,c2, seller);
+        Product p8 = new Product("Ellite Pro Book 15'6 7500U", c2Desc,850, "uploads/pro5.png", 10,c2, seller);
+        Product p9 = new Product("Tablet VX3000 Extra Light", c2Desc,850, "uploads/pro6.png", 10,c2, seller);
+        Product p10 = new Product("Tablet VX4000 8500 3TB", c2Desc,940, "uploads/pro7.png", 10,c2, seller);
+        Product p11 = new Product("Laptop XS3000 WiFi Smart", c2Desc,1200, "uploads/pro9.png", 10,c2, seller);
 
         Product p12 = new Product("Smartphone Tablet Spring2000", c3Desc,400, "uploads/pro10.png", 10,c3, seller1);
         Product p13 = new Product("Extra Thin Elitte", c3Desc,700, "uploads/pro11.png", 10,c3, seller1);
@@ -95,27 +104,27 @@ public class WaaProjectApplication implements CommandLineRunner {
 
         /* PRODUCT REVIEW START */
         p1.addReview(new ProductReview(5,"This product is very good!",buyer,true));
-        p2.addReview(new ProductReview(4,"This product is very good!",buyer,true));
+        p1.addReview(new ProductReview(4,"This product is good but not so comfortable!",buyer1,true));
+        p2.addReview(new ProductReview(5,"I bought it months ago, It works well!",buyer,true));
+        p2.addReview(new ProductReview(2,"It did not come in time!!",buyer1,true));
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28));
         /* PRODUCT REVIEW END */
 
         /* ITEM START */
         Item i1 = new Item(p1,4);
         Item i2 = new Item(p2,3);
-        Item i3= new Item(p3,5);
-        Item i4 = new Item(p5,3);
-        Item i5= new Item(p6,5);
-        Item i6 = new Item(p1,3);
-        Item i7= new Item(p2,5);
-        itemRepository.saveAll(Arrays.asList(i1,i2,i3,i4,i5,i6,i7));
-        buyer.addCardItem(i1);
-        buyer.addCardItem(i2);
-        buyer.addCardItem(i3);
+        Item i3 = new Item(p3,4);
+        Item i4 = new Item(p4,3);
+        Item i20= new Item(p20,5);
+        Item i21 = new Item(p21,3);
+        Item i22= new Item(p22,5);
+        Item i23 = new Item(p23,3);
+        itemRepository.saveAll(Arrays.asList(i1,i2,i3,i4,i20,i21,i22,i23));
         /* ITEM END */
 
         /* ORDER START */
-        Order o1 = new Order(new Date(), Arrays.asList(i6,i7), buyer, seller);
-        Order o2 = new Order(new Date(), Arrays.asList(i4,i5), buyer, seller);
+        Order o1 = new Order(new Date(), Arrays.asList(i1,i2), buyer, seller);
+        Order o2 = new Order(new Date(), Arrays.asList(i3,i4), buyer, seller);
         Address address = new Address("1000N 4th str","Fairfield","IA","United states","52557");
         Payment payment = new Payment("5257138872690125", "JOHN DOE",4,2024);
         Address address1 = new Address("1000N 4th str","Chicago","IL","United states","52557");
@@ -126,15 +135,24 @@ public class WaaProjectApplication implements CommandLineRunner {
         o2.setShippingAddress(address1);
         o2.setBillingAddress(address1);
         o2.setPayment(payment1);
-        orderRepository.save(o1);
-        orderRepository.save(o2);
 
+
+        Order o3 = new Order(new Date(), Arrays.asList(i20,i21), buyer1, seller1);
+        Order o4 = new Order(new Date(), Arrays.asList(i22,i23), buyer1, seller1);
+        Address address3 = new Address("1000N 4th str","Fairfield","IA","United states","52557");
+        Payment payment3 = new Payment("5257138872690127", "JOHN DOE",4,2024);
+        Address address4 = new Address("1000N 4th str","Chicago","IL","United states","52557");
+        Payment payment4 = new Payment("5257138872690127", "STEPHEN CURRY",3,2024);
+        o3.setShippingAddress(address3);
+        o3.setBillingAddress(address3);
+        o3.setPayment(payment3);
+        o4.setShippingAddress(address4);
+        o4.setBillingAddress(address4);
+        o4.setPayment(payment4);
+
+        orderRepository.saveAll(Arrays.asList(o1,o2));
         /* ORDER END */
 
-        /* USER FOLLOWING START */
-        buyer.addFollowing(seller);
-        /* USER FOLLOWING END */
-
-        userRepository.saveAll(Arrays.asList(admin,seller,seller1,buyer));
+        userRepository.saveAll(Arrays.asList(admin,seller,seller1,buyer,buyer1));
     }
 }

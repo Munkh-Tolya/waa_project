@@ -49,8 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isFollowing(Long sellerId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Buyer buyer = (Buyer)this.findByEmail("buyer@miu.edu");
+        Buyer buyer = this.getAuthenticatedBuyer();
         Buyer result = userRepository.isFollowing(buyer.getId(),sellerId);
         if(result != null) return true;
         else return false;
