@@ -47,4 +47,14 @@ public class SellerController {
         orderService.updateOrderStatusById(order.getId(), order.getStatus());
         return "redirect:/seller/orders";
     }
+
+    /*** Order details by seller */
+    @GetMapping(value = {"/orderList"})
+    public String orderDetails(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Seller seller = (Seller) userService.findByEmail(auth.getName());
+
+        model.addAttribute("orders", userService.getOrdersBySeller(seller));
+        return "seller/orderList";
+    }
 }
