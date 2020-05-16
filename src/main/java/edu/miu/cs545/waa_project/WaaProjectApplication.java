@@ -73,7 +73,6 @@ public class WaaProjectApplication implements CommandLineRunner {
         Product p5 = new Product("Tablet Red 8500U 2TB",c2Desc,100,"uploads/pro4.png",10,c2,seller);
         Product p6 = new Product("Laptop Sens 7200L",c2Desc,760,"uploads/pro8.png",10,c2,seller);
 
-        Product p7 = new Product("Tablet VX4000 8500 3TB", c2Desc,760, "uploads/pro8.png", 10,c2, seller);
         Product p8 = new Product("Ellite Pro Book 15'6 7500U", c2Desc,850, "uploads/pro5.png", 10,c2, seller);
         Product p9 = new Product("Tablet VX3000 Extra Light", c2Desc,850, "uploads/pro6.png", 10,c2, seller);
         Product p10 = new Product("Tablet VX4000 8500 3TB", c2Desc,940, "uploads/pro7.png", 10,c2, seller);
@@ -107,7 +106,7 @@ public class WaaProjectApplication implements CommandLineRunner {
         p1.addReview(new ProductReview(4,"This product is good but not so comfortable!",buyer1,true));
         p2.addReview(new ProductReview(5,"I bought it months ago, It works well!",buyer,true));
         p2.addReview(new ProductReview(2,"It did not come in time!!",buyer1,true));
-        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28));
+        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28));
         /* PRODUCT REVIEW END */
 
         /* ITEM START */
