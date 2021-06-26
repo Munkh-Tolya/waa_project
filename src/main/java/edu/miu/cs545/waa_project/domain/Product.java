@@ -22,7 +22,7 @@ public class Product {
     private String description;
 
     @Min(value = 0, message = "{Min.Product.unitPrice.validation}")
-    private double price;
+    private double price; //hahahaha
 
     private String imagePath;
 
