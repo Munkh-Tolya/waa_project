@@ -44,7 +44,7 @@ public class Product {
     private Seller seller;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id") //test
     private List<ProductReview> productReviewList = new ArrayList<ProductReview>();
 
     public Product(){}
